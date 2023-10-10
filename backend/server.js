@@ -2,6 +2,9 @@ const express = require('express')
 const cors = require('cors')
 const connectDB = require('./config/db')
 
+const authRoute = require('./routes/auth')
+const crudPackages = require('./routes/packages')
+
 const app = express()
 require('dotenv').config()
 app.use(cors())
@@ -22,6 +25,10 @@ process.on('unhandledRejection', (err) => {
   console.log(`An error occurred: ${err.message}`)
   server.close(() => process.exit(1))
 })
+
+// Routes
+app.use('/api/auth', authRoute)
+app.use('/api/package', crudPackages)
 
 // Gestion des erreurs centralisée
 app.use((err, req, res, next) => {

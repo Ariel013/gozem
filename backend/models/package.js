@@ -13,7 +13,7 @@ const PackageSchema = new Mongoose.Schema({
     type: Number,
     require: true
   },
-  widht: {
+  width: {
     type: Number,
     require: true
   },
