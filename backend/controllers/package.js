@@ -76,8 +76,8 @@ exports.updatePackage = async (req, res) => {
     await packToUpdate.save()
     return res.status(200).json({ message: 'Informations du package mis à jour avec succès' })
   } catch (error) {
-    console.error('Erreur lors de la mise à jour du profil', error)
-    res.status(500).json({ error: 'Utilisateur non trouvé ou Erreur lors de la mise à jour du profil admin' })
+    console.error('Erreur lors de la mise à jour du package', error)
+    res.status(500).json({ error: 'Erreur lors de la mise à jour du package' })
   }
 }
 
@@ -114,8 +114,8 @@ exports.getonePackage = async (req, res) => {
     }
     res.json(pack)
   } catch (error) {
-    console.error('Erreur lors de la récupération des opérations', error)
-    res.status(500).json({ error: 'Erreur lors de la récupération des opérations' })
+    console.error('Erreur lors de la récupération des packages', error)
+    res.status(500).json({ error: 'Erreur lors de la récupération des packages' })
   }
 }
 
@@ -125,7 +125,7 @@ exports.getPackages = async (req, res) => {
     const packages = await Package.find()
     return res.status(200).json(packages)
   } catch (error) {
-    console.error('Erreur lors de la récupération des opérations', error)
-    res.status(500).json({ error: 'Erreur lors de la récupération des opérations' })
+    console.error('Erreur lors de la récupération des packages', error)
+    res.status(500).json({ error: 'Erreur lors de la récupération des packages' })
   }
 }

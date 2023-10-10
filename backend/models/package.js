@@ -2,69 +2,69 @@ const Mongoose = require('mongoose')
 const PackageSchema = new Mongoose.Schema({
   active_delivery_id: {
     type: Mongoose.Schema.Types.ObjectId,
-    ref: 'Delivery',
-    require: true
+    ref: 'Delivery'
+    // required: true
   },
   description: {
     type: String,
-    require: true
+    required: true
   },
   weight: {
     type: Number,
-    require: true
+    required: true
   },
   width: {
     type: Number,
-    require: true
+    required: true
   },
   height: {
     type: Number,
-    require: true
+    required: true
   },
   depth: {
     type: Number,
-    require: true
+    required: true
   },
   from_name: {
     type: String,
-    require: true
+    required: true
   },
   from_address: {
     type: String,
-    require: true
+    required: true
   },
   from_location: {
     lat: {
       type: Number,
-      require: true
+      required: true
     },
     lng: {
       type: Number,
-      require: true
+      required: true
     }
   },
   to_name: {
     type: String,
-    require: true
+    required: true
   },
   to_address: {
     type: String,
-    require: true
+    required: true
   },
   to_location: {
     lat: {
       type: Number,
-      require: true
+      required: true
     },
     lng: {
       type: Number,
-      require: true
+      required: true
     }
   },
   created_at: {
     type: Date,
     default: Date.now(),
-    require: true
+    required: true
   }
 })
 const Package = Mongoose.model('Package', PackageSchema)

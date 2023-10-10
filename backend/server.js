@@ -4,6 +4,7 @@ const connectDB = require('./config/db')
 
 const authRoute = require('./routes/auth')
 const crudPackages = require('./routes/packages')
+const crudDeliveries = require('./routes/delivery')
 
 const app = express()
 require('dotenv').config()
@@ -29,6 +30,7 @@ process.on('unhandledRejection', (err) => {
 // Routes
 app.use('/api/auth', authRoute)
 app.use('/api/package', crudPackages)
+app.use('/api/delivery', crudDeliveries)
 
 // Gestion des erreurs centralisée
 app.use((err, req, res, next) => {

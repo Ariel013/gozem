@@ -3,28 +3,28 @@ const UserSchema = new Mongoose.Schema({
   name: {
     type: String,
     unique: true,
-    require: true
+    required: true
   },
   email: {
     type: String,
     unique: true,
-    require: true
+    required: true
   },
   password: {
     type: String,
     minlength: 8,
-    require: true
+    required: true
   },
   is_admin: {
     type: Boolean,
     default: false,
-    require: true
+    required: true
   },
   phone: {
     type: Number,
     unique: true,
     maxlength: 8,
-    require: true
+    required: true
   },
   email_verified: {
     type: Boolean,
@@ -33,7 +33,7 @@ const UserSchema = new Mongoose.Schema({
   created_at: {
     type: Date,
     default: Date.now(),
-    require: true
+    required: true
   },
   confirmation_token: {
     type: String

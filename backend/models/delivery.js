@@ -2,29 +2,29 @@ const Mongoose = require('mongoose')
 const DeliverySchema = new Mongoose.Schema({
   package_id: {
     type: Mongoose.Schema.Types.ObjectId,
-    ref: 'Package',
-    require: true
+    ref: 'Package'
+    // required: true
   },
   pickup_time: {
     type: Date,
-    require: true
+    required: true
   },
   start_time: {
     type: Date,
-    require: true
+    required: true
   },
   end_time: {
     type: Date,
-    require: true
+    required: true
   },
   location: {
     lat: {
       type: Number,
-      require: true
+      required: true
     },
     lng: {
       type: Number,
-      require: true
+      required: true
     }
   },
   status: {
@@ -34,7 +34,7 @@ const DeliverySchema = new Mongoose.Schema({
   created_at: {
     type: Date,
     default: Date.now(),
-    require: true
+    required: true
   }
 })
 const Delivery = Mongoose.model('Delivery', DeliverySchema)
