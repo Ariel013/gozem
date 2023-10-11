@@ -3,6 +3,7 @@ const cors = require('cors')
 const connectDB = require('./config/db')
 
 const authRoute = require('./routes/auth')
+const crudUsers = require('./routes/user')
 const crudPackages = require('./routes/packages')
 const crudDeliveries = require('./routes/delivery')
 
@@ -29,6 +30,7 @@ process.on('unhandledRejection', (err) => {
 
 // Routes
 app.use('/api/auth', authRoute)
+app.use('/api/users', crudUsers)
 app.use('/api/package', crudPackages)
 app.use('/api/delivery', crudDeliveries)
 

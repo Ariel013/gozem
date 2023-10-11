@@ -15,15 +15,19 @@ const UserSchema = new Mongoose.Schema({
     minlength: 8,
     required: true
   },
-  is_admin: {
-    type: Boolean,
-    default: false,
-    required: true
-  },
   phone: {
     type: Number,
     unique: true,
     maxlength: 8,
+    required: true
+  },
+  is_admin: {
+    type: Boolean,
+    default: false
+  },
+  is_active: {
+    type: Boolean,
+    default: true,
     required: true
   },
   email_verified: {
