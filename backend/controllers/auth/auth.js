@@ -5,16 +5,17 @@ const { generateConfirmationToken } = require('./passwordUtils')
 const { sendMail } = require('./sendMail')
 
 const bcrypt = require('bcrypt')
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 require('dotenv').config()
 
 const emailRegex = /^[a-zA-Z0-9_\-.]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/
 const regex = /^[a-zA-Z]+(?: [a-zA-Z ]+){0,29}$/
+const tokenKey = process.env.jwtKey
 const saltRounds = 10
-let newUser = ''
 let nameUser = ''
 let emailUser = ''
+let newUser = ''
 
 // Register
 exports.register = async (req, res, next) => {
@@ -124,6 +125,57 @@ exports.register = async (req, res, next) => {
         message: 'Something wrong',
         error: error.message
       })
+    }
+  }
+}
+
+// Login
+exports.login = async (req, res, next) => {
+  const requestUser = req.body
+
+  if (requestUser.password.lenght < 8) {
+    return res.status(400).json({ message: 'Mot de passe incorrect' })
+  } else if (requestUser.name === '' || requestUser.email === '' || requestUser.password === '') {
+    return res.status(400).json({ message: 'All fields are required' })
+  } else {
+    try {
+      const user = await User.findOne({
+        $or: [
+          { email: requestUser.email },
+          { name: requestUser.name }
+        ]
+      })
+
+      if (user) {
+        //  Comparaison des mots de passe
+        const comparaison = await bcrypt.compare(requestUser.password, user.password)
+
+        // Generation du token
+        if (comparaison === true) {
+          if (user.email_verified === true && user.is_active === true) {
+            const token = jwt.sign({ userId: user.id, is_admin: user.is_admin }, tokenKey, { expiresIn: '24h' })
+            return res.status(200).json({
+              message: 'Connexion réussie',
+              token,
+              is_admin: user.is_admin,
+              name: user.name,
+              email: user.email
+            })
+          } else if (user.email_verified === false) {
+            return res.status(401).json({ message: 'Email not verified' })
+          } else if (user.is_active === false) {
+            return res.status(401).json({ message: 'Compte is not available' })
+          } else {
+            return res.status(401).json({ message: 'You are not authorized to login' })
+          }
+        } else {
+          res.status(401).json({ message: 'Wrong password! Please enter valid password' })
+        }
+      } else {
+        return res.status(400).json({ message: 'Wrong informations' })
+      }
+    } catch (error) {
+      return res.status(500).json({ message: 'user not catch', error: error.message })
     }
   }
 }

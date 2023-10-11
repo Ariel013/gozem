@@ -31,8 +31,8 @@ process.on('unhandledRejection', (err) => {
 // Routes
 app.use('/api/auth', authRoute)
 app.use('/api/users', crudUsers)
-app.use('/api/package', crudPackages)
-app.use('/api/delivery', crudDeliveries)
+app.use('/api', crudPackages)
+app.use('/api', crudDeliveries)
 
 // Gestion des erreurs centralisée
 app.use((err, req, res, next) => {
