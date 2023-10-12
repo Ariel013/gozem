@@ -32,7 +32,7 @@ export class AddUserComponent implements OnInit{
   onFormSubmit() {
     if (this.usersForm.valid) {
       if(this.data) {
-        this._usersService.updateUser(this.data.id, this.usersForm.value).subscribe({
+        this._usersService.updateUser(this.data._id, this.usersForm.value).subscribe({
           next: (val: any) => {
             alert('User profile updated successfully');
             this._dialogRef.close(true);
