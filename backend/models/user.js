@@ -21,9 +21,9 @@ const UserSchema = new Mongoose.Schema({
     maxlength: 8,
     required: true
   },
-  is_admin: {
-    type: Boolean,
-    default: false
+  role: {
+    type: String,
+    enum: ['admin', 'user', 'livreur']
   },
   is_active: {
     type: Boolean,

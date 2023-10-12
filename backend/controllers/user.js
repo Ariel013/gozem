@@ -12,21 +12,21 @@ exports.getUsers = async (req, res) => {
     // Calcule de l'indice de départ
     const startIndex = (page - 1) * perPage
 
-    // Requete vers la BD pour récupérer les utilisateurs avec is_admin à false
-    const users = await User.find({ is_admin: false })
+    // Requete vers la BD pour récupérer les utilisateurs avec role user et livreur
+    const users = await User.find({ $or: [{ role: 'user' }, { role: 'livreur' }] })
       .skip(startIndex)
       .limit(perPage)
       .exec()
 
     // Recupération du nombre total d'utilisateurs
-    const totalUser = await User.countDocuments({ is_admin: false })
+    // const totalUser = await User.countDocuments({ $or: [{ role: 'user' }, { role: 'livreur' }] })
 
     // Retour des données paginées
     res.status(200).json({
-      data: users,
-      currentPage: page,
-      totalPages: Math.ceil(totalUser / perPage),
-      totalItems: totalUser
+      users
+      // currentPage: page,
+      // totalPages: Math.ceil(totalUser / perPage),
+      // totalItems: totalUser
     })
   } catch (error) {
     console.error('Erreur lors de la récupération des utilisateurs:', error)
@@ -43,14 +43,14 @@ exports.getAdmins = async (req, res) => {
     // Calcule de l'indice de départ
     const startIndex = (page - 1) * perPage
 
-    // Requete vers la BD pour récupérer les utilisateurs avec is_admin à false
-    const users = await User.find({ is_admin: true })
+    // Requete vers la BD pour récupérer les utilisateurs avec role à user ou livreur
+    const users = await User.find({ role: 'admin' })
       .skip(startIndex)
       .limit(perPage)
       .exec()
 
     // Recupération du nombre total d'utilisateurs
-    const totalUser = await User.countDocuments({ is_admin: true })
+    const totalUser = await User.countDocuments({ role: 'admin' })
 
     // Retour des données paginées
     res.status(200).json({
@@ -130,7 +130,7 @@ exports.getOneUser = async (req, res) => {
     const userId = req.params.id
 
     // Recherche de l'utilisateur correspondant
-    const user = await User.findOne({ _id: userId, is_admin: false })
+    const user = await User.findOne({ _id: userId, $or: [{ role: 'user' }, { role: 'livreur' }] })
     if (!user) {
       return res.status(404).json({ error: 'Utilisateur non trouvé' })
     }
@@ -169,7 +169,7 @@ exports.getOneAdmin = async (req, res) => {
     const userId = req.params.id
 
     // Recherche de l'admin correspondant
-    const user = await User.findOne({ _id: userId, is_admin: true })
+    const user = await User.findOne({ _id: userId, role: 'admin' })
     if (!user) {
       return res.status(404).json({ error: 'Utilisateur non trouvé' })
     }
@@ -192,7 +192,7 @@ exports.makeAdmin = async (req, res) => {
     }
 
     // Faire Admin
-    user.is_admin = true
+    user.role = 'admin'
     await user.save()
     res.status(200).json({ message: 'Utilisateur est maintenant un administrateur' })
   } catch (error) {

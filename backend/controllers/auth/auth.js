@@ -22,7 +22,7 @@ exports.register = async (req, res, next) => {
   const user = req.body
 
   // Control of fields
-  if (!user.name || !user.email || !user.phone || !user.password) {
+  if (!user.name || !user.email || !user.phone || !user.password || !user.role) {
     return res.status(400).json({ message: 'All fields are required to register' })
   } else if (!emailRegex.test(user.email)) {
     return res.status(400).json({ message: 'Invalid email format' })
@@ -153,11 +153,11 @@ exports.login = async (req, res, next) => {
         // Generation du token
         if (comparaison === true) {
           if (user.email_verified === true && user.is_active === true) {
-            const token = jwt.sign({ userId: user.id, is_admin: user.is_admin }, tokenKey, { expiresIn: '24h' })
+            const token = jwt.sign({ userId: user.id, role: user.role }, tokenKey, { expiresIn: '24h' })
             return res.status(200).json({
               message: 'Connexion réussie',
               token,
-              is_admin: user.is_admin,
+              role: user.role,
               name: user.name,
               email: user.email
             })
