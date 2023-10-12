@@ -4,17 +4,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddUserComponent } from './add-user/add-user.component';
 import { GetUserComponent } from './get-user/get-user.component';
 
+// packages
+import { GetPackageComponent } from './get-package/get-package.component';
+import { AddPackageComponent } from './add-package/add-package.component';
+
 const routes: Routes = [
   // users view
-  {
-    path: "admin",
-    children: [
-      
-      { path: "getusers", component: GetUserComponent },
-      { path: "adduser", component: AddUserComponent }
-      
-    ],
-  }
+  { path: "users", component: GetUserComponent },
+  { path: "adduser", component: AddUserComponent },
+
+  { path: "packages", component: GetPackageComponent },
+  { path: "packages/addpackage", component: AddPackageComponent },
+  // packages view
+  // {
+  //   path: "packages",
+  //   children: [
+  //     { path: "getpackages", component: GetPackageComponent },
+  //     { path: "addpackage", component: AddPackageComponent }
+  //   ],
+  // }
 ];
 
 @NgModule({

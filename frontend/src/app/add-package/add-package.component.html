@@ -1,0 +1,90 @@
+<div mat-dialog-title>
+    <h1>Packages Form</h1>
+</div>
+<form [formGroup]="packagesForm" (ngSubmit)="onFormPackageSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" placeholder="Ex. Colis" formControlName="description">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Weight</mat-label>
+                <input matInput type="number" placeholder="Ex. 8" formControlName="weight">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>From_Name</mat-label>
+                <input matInput type="text" placeholder="Ex. Ariel" formControlName="from_name">
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Width</mat-label>
+                <input matInput type="number" placeholder="Ex. 12" formControlName="width">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Height</mat-label>
+                <input matInput type="number" placeholder="Ex. 56" formControlName="height">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Depth</mat-label>
+                <input matInput type="number" placeholder="Ex. 12" formControlName="depth">
+            </mat-form-field>
+        </div>
+
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>From_Address</mat-label>
+                <input matInput type="text" placeholder="Ex. Cotonou" formControlName="from_address">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>To_Name</mat-label>
+                <input matInput type="text" placeholder="Ex. Yves" formControlName="to_name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>To_Address</mat-label>
+                <input matInput type="text" placeholder="Ex. Yves" formControlName="to_address">
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+                <mat-label>From_Location</mat-label>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Lat</mat-label>
+                    <input matInput type="number" placeholder="Ex. 1,32" formControlName="from_location.lat">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Long</mat-label>
+                    <input matInput type="number" placeholder="Ex. -8,09" formControlName="from_location.long">
+                </mat-form-field>
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <mat-label>To_Location</mat-label>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Lat</mat-label>
+                    <input matInput type="number" placeholder="Ex. 1,32" formControlName="to_location.lat">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Long</mat-label>
+                    <input matInput type="number" placeholder="Ex. -8,09" formControlName="to_location.long">
+                </mat-form-field>
+            </div>
+            
+        </div>
+        
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+    </div>
+</form>
+<!-- <router-outlet></router-outlet> -->

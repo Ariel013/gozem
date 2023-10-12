@@ -22,12 +22,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GetUserComponent } from './get-user/get-user.component';
+import { GetPackageComponent } from './get-package/get-package.component';
+import { AddPackageComponent } from './add-package/add-package.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddUserComponent,
-    GetUserComponent
+    GetUserComponent,
+    GetPackageComponent,
+    AddPackageComponent
   ],
   imports: [
     BrowserModule,
