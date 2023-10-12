@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CoreService } from '../core/core.service';
 
 @Component({
   selector: 'app-add-user',
@@ -14,7 +15,8 @@ export class AddUserComponent implements OnInit{
   constructor(private _fb: FormBuilder,
     private _usersService: UsersService,
     private _dialogRef: MatDialogRef<AddUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _coreService: CoreService
   ) {
     this.usersForm = this._fb.group({
       name: '',
@@ -34,7 +36,7 @@ export class AddUserComponent implements OnInit{
       if(this.data) {
         this._usersService.updateUser(this.data._id, this.usersForm.value).subscribe({
           next: (val: any) => {
-            alert('User profile updated successfully');
+            this._coreService.openSnackBar('User profile updated successfully!', 'done')
             this._dialogRef.close(true);
           },
           error: (err: any) => {
@@ -52,8 +54,8 @@ export class AddUserComponent implements OnInit{
       } else {
 
         this._usersService.addUser(this.usersForm.value).subscribe({
-          next: (val: any) => {
-            alert('User added successfully');
+          next: (val: any) => { 
+            this._coreService.openSnackBar('User added successfully!', 'done')
             this._dialogRef.close(true);
           },
           error: (err: any) => {

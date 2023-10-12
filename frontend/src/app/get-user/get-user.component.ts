@@ -1,19 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddUserComponent } from './add-user/add-user.component';
-import { UsersService } from './services/users.service';
+import { AddUserComponent } from '../add-user/add-user.component';
+import { UsersService } from '../services/users.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { CoreService } from './core/core.service';
+import { CoreService } from '../core/core.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-get-user',
+  templateUrl: './get-user.component.html',
+  styleUrls: ['./get-user.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'frontend';
+export class GetUserComponent implements OnInit{
 
   displayedColumns: string[] = ['name', 'email', 'phone', 'role', 'action'];
   dataSource!: MatTableDataSource<any>;
@@ -29,16 +28,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
-  }
-  openAddUserForm() {
-    const dialogRef = this._dialog.open(AddUserComponent);
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-          this.getUsers();
-        }
-      }
-    })
   }
 
   getUsers() {
@@ -86,4 +75,5 @@ export class AppComponent implements OnInit {
     })
 
   }
+
 }

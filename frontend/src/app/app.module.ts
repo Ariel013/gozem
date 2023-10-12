@@ -21,11 +21,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { GetUserComponent } from './get-user/get-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddUserComponent
+    AddUserComponent,
+    GetUserComponent
   ],
   imports: [
     BrowserModule,
