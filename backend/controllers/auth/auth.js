@@ -23,11 +23,11 @@ exports.register = async (req, res, next) => {
 
   // Control of fields
   if (!user.name || !user.email || !user.phone || !user.password) {
-    return res.status(500).json({ message: 'All fields are required to register' })
+    return res.status(400).json({ message: 'All fields are required to register' })
   } else if (!emailRegex.test(user.email)) {
-    return res.status(500).json({ message: 'Invalid email format' })
+    return res.status(400).json({ message: 'Invalid email format' })
   } else if (!regex.test(user.name)) {
-    return res.status(500).json({ message: 'Invalid username format' })
+    return res.status(400).json({ message: 'Invalid username format' })
   } else {
     try {
       nameUser = await User.findOne({ name: user.name })
