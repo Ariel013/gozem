@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 
 // index
 import { IndexComponent } from './index/index.component';
+import { LivreurComponent } from './livreur/livreur.component';
 
 const routes: Routes = [
   // users view
@@ -42,6 +43,9 @@ const routes: Routes = [
 
   // index
   { path: "index", component: IndexComponent },
+
+  // livreur
+  { path: "livreur", component: LivreurComponent },
 
 ];
 

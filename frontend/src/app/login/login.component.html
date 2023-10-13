@@ -1,34 +1,32 @@
 <div class="bootstrap-wrapper">
     <div class="container">
-        <div class="row mt20">
+        <div class="row" style="margin-top: 90px;">
             <div class="col-md-6 offset-md-3">
-                <mat-card>
+                <div class="container text-center">
+                    <img src="../../assets/gozem.png" alt="GOZEM SUPER APP">
+                </div>
+
+                <h1 class="text-center">Login here !!!</h1>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="formulaire">
+
+                    <!-- Username field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input class="full-width beauty" type="email" placeholder="Email" formControlName="email">
+                        <mat-hint>Valid Email please</mat-hint>
+                    </mat-form-field>
+
+                    <!-- Password field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input class="full-width beauty" type="password" placeholder="Password" formControlName="password">
+                    </mat-form-field>
+
                     <div class="container text-center">
-                        <img src="../../assets/gozem.png" alt="GOZEM SUPER APP">
+                        <button mat-raised-buton color="primary" type="submit">Login</button>
                     </div>
-
-                    <h1 class="text-center">Login here !!!</h1>
-
-                    <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
-
-                        <!-- Username field -->
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Email</mat-label>
-                            <input type="email" placeholder="Email" formControlName="email">
-                            <mat-hint>Valid Email please</mat-hint>
-                        </mat-form-field>
-
-                        <!-- Password field -->
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Password</mat-label>
-                            <input type="password" placeholder="Password" formControlName="password">
-                        </mat-form-field>
-
-                        <div class="container text-center">
-                            <button mat-raised-buton color="primary" type="submit">Login</button>
-                        </div>
-                    </form>
-                </mat-card>
+                </form>
             </div>
         </div>
     </div>

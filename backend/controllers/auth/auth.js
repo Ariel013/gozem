@@ -179,3 +179,24 @@ exports.login = async (req, res, next) => {
     }
   }
 }
+
+// Get user Role
+exports.getRole = async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1]
+
+  if (!token) {
+    return res.status(401).json({ message: ' you are Unauthorized' })
+  }
+
+  // Verification du token et extraction des informations
+  // console.log(token)
+  jwt.verify(token, tokenKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: ' hello Unauthorized' })
+    }
+
+    // Extraction du role avec decoded et envoie
+    const userRole = decoded.role
+    res.json({ role: userRole })
+  })
+}

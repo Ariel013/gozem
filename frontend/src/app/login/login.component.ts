@@ -40,13 +40,34 @@ export class LoginComponent implements OnInit {
           this.response = response;
           // console.log(response)
 
-          // Stocker le token dans le Local Storage
-        localStorage.setItem('token', response.token);
-        
+          // Stockage du token dans le Local Storage
+          localStorage.setItem('token', response.token);
+
+          // Recupération du role de l'utilisateur
+          this._loginService.getUserRole().subscribe({
+            next: (role: string) => {
+              // Redirection de l'utilisateur
+              if (role === 'admin') {
+                this.router.navigate(['/users']);
+              } else if (role === 'livreur') {
+                this.router.navigate(['/livreur'])
+              } else if (role === 'user') {
+                this.router.navigate(['/index'])
+              } else {
+                alert ('Role inconnu')
+              }
+            },
+            error: (error) => {
+              console.error(error);
+              // Gérer l'erreur lors de la récupération du rôle
+              alert('Erreur lors de la récupération du rôle.');
+            }
+          })
+
           this._coreService.openSnackBar('User logged successfully!', 'done')
 
           // Après une connexion réussie, redirection de l'utilisateur vers la page d'accueil.
-          this.router.navigate(['/index']);
+          // this.router.navigate(['/index']);
         },
         error: (err: any) => {
           console.error(err);

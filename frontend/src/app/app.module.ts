@@ -30,6 +30,7 @@ import { GetDeliveryComponent } from './get-delivery/get-delivery.component';
 import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
 import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
+import { LivreurComponent } from './livreur/livreur.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { IndexComponent } from './index/index.component';
     AddDeliveryComponent,
     LoginComponent,
     IndexComponent,
+    LivreurComponent,
   ],
   imports: [
     BrowserModule,

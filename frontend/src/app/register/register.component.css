@@ -10,3 +10,25 @@ html,
 .text-center {
     text-align: center;
 }
+
+.mat-form-field {
+    width: 100%;
+}
+
+.formulaire {
+    width: 30%;
+    margin: 0 auto;
+    /* border: 1px solid; */
+}
+
+.radio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.beauty {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* border-radius: 2rem; */
+}

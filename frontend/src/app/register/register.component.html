@@ -1,62 +1,52 @@
 <div class="bootstrap-wrapper">
     <div class="container">
-        <div class="row" style="margin-top: 20px;">
+        <div class="row" style="margin-top: 60px;">
             <div class="col-md-6 offset-md-3">
-                <mat-card>
+                <div class="container text-center">
+                    <img src="../../assets/gozem.png" alt="GOZEM SUPER APP">
+
+                </div>
+                <h1 class="text-center">Register Here !!!</h1>
+
+                <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" class="formulaire" >
+                    <!-- Username field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input class="full-width beauty" type="string" placeholder="Username" formControlName="name">
+                        <mat-hint>Username must be unique</mat-hint>
+                    </mat-form-field>
+
+                    <!-- Email field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input class="full-width beauty" type="email" placeholder="Email" formControlName="email">
+                    </mat-form-field>
+
+                    <!-- Phone field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Phone Number</mat-label>
+                        <input class="full-width beauty" type="number" placeholder="Phone Number" formControlName="phone">
+                    </mat-form-field>
+
+
+                    <mat-radio-group class="radio" aria-label="Select an option" formControlName="role">
+                        <mat-label><b>Role</b></mat-label>
+                        <mat-radio-button value="user">User</mat-radio-button>
+                        <mat-radio-button value="livreur">Livreur</mat-radio-button>
+                    </mat-radio-group>
+
+
+                    <!-- Password field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input class="full-width beauty" type="password" placeholder="Password" formControlName="password">
+                    </mat-form-field>
+
                     <div class="container text-center">
-                        <img src="../../assets/gozem.png" alt="GOZEM SUPER APP">
-
+                        <button mat-raised-button color="primary">Register</button>
                     </div>
-                    <h1 class="text-center">Register Here !!!</h1>
 
-                    <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
-                        <!-- Username field -->
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Username</mat-label>
-                            <input type="string" placeholder="Username" formControlName="name">
-                            <mat-hint>Username must be unique</mat-hint>
-                        </mat-form-field>
-
-                        <!-- Email field -->
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Email</mat-label>
-                            <input type="email" placeholder="Email" formControlName="email">
-                        </mat-form-field>
-
-                        <!-- Phone field -->
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Phone Number</mat-label>
-                            <input type="number" placeholder="Phone Number" formControlName="phone">
-                        </mat-form-field>
-
-
-                        <mat-radio-group aria-label="Select an option" formControlName="role">
-                            <mat-label><b>Role</b></mat-label>
-                            <mat-radio-button value="user">User</mat-radio-button>
-                            <mat-radio-button value="livreur">Livreur</mat-radio-button>
-                        </mat-radio-group>
-
-                        <!-- <mat-form-field formControlName="role">
-                        <mat-label>Select your profile</mat-label>
-                        <mat-select>
-                            <mat-option value="user">User</mat-option>
-                            <mat-option value="livreur">Livreur</mat-option>
-                        </mat-select>
-                    </mat-form-field> -->
-
-
-                        <!-- Password field -->
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Password</mat-label>
-                            <input type="password" placeholder="Password" formControlName="password">
-                        </mat-form-field>
-
-                        <div class="container text-center">
-                            <button mat-raised-button color="primary">Register</button>
-                        </div>
-
-                    </form>
-                </mat-card>
+                </form>
             </div>
 
         </div>

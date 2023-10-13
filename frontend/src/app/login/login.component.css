@@ -1,3 +1,15 @@
 .full-width {
     width: 100%;
 }
+
+.formulaire {
+    width: 30%;
+    margin: 0 auto;
+    /* border: 1px solid; */
+}
+
+.beauty {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* border-radius: 2rem; */
+}

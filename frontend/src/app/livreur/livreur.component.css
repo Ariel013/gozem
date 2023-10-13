@@ -1,0 +1,54 @@
+.full-width {
+    width: 100%;
+}
+
+.formulaire {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-right: 5%;
+    /* margin: 0 auto; */
+    /* border: 1px solid; */
+}
+
+.beauty {
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.package {
+    margin: 20px ;
+    margin-bottom: 100px;
+}
+
+.delivery {
+    margin: 20px;
+}
+
+.parent {
+    display: flex;
+}
+.children1 {
+    width: 34%;
+}
+.children2 {
+    width: 46%;
+    border: 3px solid;
+    /* border-radius: 2rem; */
+}
+.children3 {
+    width: 20%;
+    margin: 10px;
+}
+
+.but {
+    padding: 30px;
+    width: 50%;
+}
+
+
+.children4 {
+    margin: 40px;
+}
