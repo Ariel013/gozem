@@ -11,6 +11,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
@@ -24,6 +25,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GetUserComponent } from './get-user/get-user.component';
 import { GetPackageComponent } from './get-package/get-package.component';
 import { AddPackageComponent } from './add-package/add-package.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AddPackageComponent } from './add-package/add-package.component';
     AddUserComponent,
     GetUserComponent,
     GetPackageComponent,
-    AddPackageComponent
+    AddPackageComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { AddPackageComponent } from './add-package/add-package.component';
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

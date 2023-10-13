@@ -11,6 +11,7 @@ import { CoreService } from '../core/core.service';
 })
 export class AddPackageComponent implements OnInit{
   packagesForm: FormGroup;
+  formBuilder: any;
 
   constructor(private _fb: FormBuilder,
     private _packagesService: PackagesService,
@@ -19,22 +20,22 @@ export class AddPackageComponent implements OnInit{
     private _coreService: CoreService
   ) {
     this.packagesForm = this._fb.group({
-      description: '',
-      weight: '',
-      width: '',
-      height: '',
-      depth: '',
-      from_name: '',
-      from_address: '',
-      from_location: this._fb.group({
-        lat: '',
-        lng: '',
+      description: ['', Validators.required],
+      weight: ['', Validators.required],
+      width: ['', Validators.required],
+      height: ['', Validators.required],
+      depth: ['', Validators.required],
+      from_name: ['', Validators.required],
+      from_address: ['', Validators.required],
+      from_location: this.formBuilder.group({
+        lat: ['', Validators.required],
+        lng: ['', Validators.required],
       }),
-      to_name: '',
-      to_address: '',
-      to_location: this._fb.group({
-        lat: '',
-        lng: '',
+      to_name: ['', Validators.required],
+      to_address: ['', Validators.required],
+      to_location: this.formBuilder.group({
+        lat: ['', Validators.required],
+        lng: ['', Validators.required],
       }),
 
     })

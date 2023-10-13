@@ -46,7 +46,7 @@ export class GetUserComponent implements OnInit{
         this.dataSource = new MatTableDataSource(res.users)
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator
-        console.log(res.users)
+        // console.log(res.users)
       },
       error: console.log
     })

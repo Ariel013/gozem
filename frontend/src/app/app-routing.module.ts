@@ -8,21 +8,21 @@ import { GetUserComponent } from './get-user/get-user.component';
 import { GetPackageComponent } from './get-package/get-package.component';
 import { AddPackageComponent } from './add-package/add-package.component';
 
+// register
+import { RegisterComponent } from './register/register.component';
+
 const routes: Routes = [
   // users view
   { path: "users", component: GetUserComponent },
   { path: "adduser", component: AddUserComponent },
-
+  
+  // packages view
   { path: "packages", component: GetPackageComponent },
   { path: "packages/addpackage", component: AddPackageComponent },
-  // packages view
-  // {
-  //   path: "packages",
-  //   children: [
-  //     { path: "getpackages", component: GetPackageComponent },
-  //     { path: "addpackage", component: AddPackageComponent }
-  //   ],
-  // }
+  
+  // register
+  { path: "register", component: RegisterComponent },
+
 ];
 
 @NgModule({
