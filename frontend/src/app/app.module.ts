@@ -28,6 +28,8 @@ import { AddPackageComponent } from './add-package/add-package.component';
 import { RegisterComponent } from './register/register.component';
 import { GetDeliveryComponent } from './get-delivery/get-delivery.component';
 import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
+import { LoginComponent } from './login/login.component';
+import { IndexComponent } from './index/index.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
     RegisterComponent,
     GetDeliveryComponent,
     AddDeliveryComponent,
+    LoginComponent,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,

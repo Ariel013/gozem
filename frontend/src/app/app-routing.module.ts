@@ -1,19 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// users
+// Users
 import { AddUserComponent } from './add-user/add-user.component';
 import { GetUserComponent } from './get-user/get-user.component';
 
-// packages
+// Packages
 import { GetPackageComponent } from './get-package/get-package.component';
 import { AddPackageComponent } from './add-package/add-package.component';
 
-// register
+// Register
 import { RegisterComponent } from './register/register.component';
 
-// delivery
+// Delivery
 import { GetDeliveryComponent } from './get-delivery/get-delivery.component';
 import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
+
+//Login
+import { LoginComponent } from './login/login.component';
+
+// index
+import { IndexComponent } from './index/index.component';
 
 const routes: Routes = [
   // users view
@@ -30,6 +36,12 @@ const routes: Routes = [
   
   // register
   { path: "register", component: RegisterComponent },
+
+  // login
+  { path: "login", component: LoginComponent },
+
+  // index
+  { path: "index", component: IndexComponent },
 
 ];
 
