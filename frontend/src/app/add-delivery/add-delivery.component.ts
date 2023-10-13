@@ -25,7 +25,7 @@ export class AddDeliveryComponent implements OnInit {
       end_time: ['', Validators.required],
       location: this._fb.group({
         lat: ['', Validators.required],
-        lng: ['', Validators.required],
+        long: ['', Validators.required],
       }),
     })
   }
