@@ -31,6 +31,10 @@ import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
 import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
 import { LivreurComponent } from './livreur/livreur.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import {MatListModule} from '@angular/material/list';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +49,8 @@ import { LivreurComponent } from './livreur/livreur.component';
     LoginComponent,
     IndexComponent,
     LivreurComponent,
+    SideBarComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +72,8 @@ import { LivreurComponent } from './livreur/livreur.component';
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

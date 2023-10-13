@@ -21,6 +21,8 @@ import { LoginComponent } from './login/login.component';
 // index
 import { IndexComponent } from './index/index.component';
 import { LivreurComponent } from './livreur/livreur.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   // users view
@@ -46,6 +48,23 @@ const routes: Routes = [
 
   // livreur
   { path: "livreur", component: LivreurComponent },
+
+  // sideBar
+  { path: "sidebar", component: SideBarComponent },
+
+  // dashboard
+  { path: "dashboard", component: DashboardComponent,
+children: [
+  {
+    path: "users", component:GetUserComponent,
+  },
+  {
+    path: "packages", component:GetPackageComponent,
+  },
+  {
+    path: "delivery", component:GetDeliveryComponent,
+  }
+] },
 
 ];
 
