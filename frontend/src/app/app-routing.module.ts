@@ -11,6 +11,10 @@ import { AddPackageComponent } from './add-package/add-package.component';
 // register
 import { RegisterComponent } from './register/register.component';
 
+// delivery
+import { GetDeliveryComponent } from './get-delivery/get-delivery.component';
+import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
+
 const routes: Routes = [
   // users view
   { path: "users", component: GetUserComponent },
@@ -19,6 +23,10 @@ const routes: Routes = [
   // packages view
   { path: "packages", component: GetPackageComponent },
   { path: "packages/addpackage", component: AddPackageComponent },
+
+  // delivery view
+  { path: "delivery", component: GetDeliveryComponent },
+  { path: "delivery/adddelivery", component: AddDeliveryComponent },
   
   // register
   { path: "register", component: RegisterComponent },

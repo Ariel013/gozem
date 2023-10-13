@@ -26,6 +26,8 @@ import { GetUserComponent } from './get-user/get-user.component';
 import { GetPackageComponent } from './get-package/get-package.component';
 import { AddPackageComponent } from './add-package/add-package.component';
 import { RegisterComponent } from './register/register.component';
+import { GetDeliveryComponent } from './get-delivery/get-delivery.component';
+import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { RegisterComponent } from './register/register.component';
     GetUserComponent,
     GetPackageComponent,
     AddPackageComponent,
-    RegisterComponent
+    RegisterComponent,
+    GetDeliveryComponent,
+    AddDeliveryComponent,
   ],
   imports: [
     BrowserModule,

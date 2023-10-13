@@ -33,7 +33,7 @@ export class AddPackageComponent implements OnInit{
       }),
       to_name: ['', Validators.required],
       to_address: ['', Validators.required],
-      to_location: this.formBuilder.group({
+      to_location: this._fb.group({
         lat: ['', Validators.required],
         lng: ['', Validators.required],
       }),

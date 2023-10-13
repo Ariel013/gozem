@@ -1,0 +1,49 @@
+<div mat-dialog-title>
+    <h1>Delivery Form</h1>
+</div>
+<form [formGroup]="deliveryForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Pickup_time</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="pickup_time">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Start_Time</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="start_time">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <!-- <mat-datepicker #picker></mat-datepicker> -->
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>End_Time</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="end_time">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <!-- <mat-datepicker #picker></mat-datepicker> -->
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-label>Location</mat-label>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Lat</mat-label>
+                    <input matInput type="number" placeholder="Ex. 1,32" formControlName="location.lat">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Long</mat-label>
+                    <input matInput type="number" placeholder="Ex. -8,09" formControlName="location.long">
+                </mat-form-field>
+            </div>
+
+        </div>
+        
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+    </div>
+</form>
+<!-- <router-outlet></router-outlet> -->

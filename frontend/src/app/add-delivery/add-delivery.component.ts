@@ -1,42 +1,46 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsersService } from '../services/users.service';
+import { DeliveryService } from '../services/delivery.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CoreService } from '../core/core.service';
 
 @Component({
-  selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  selector: 'app-add-delivery',
+  templateUrl: './add-delivery.component.html',
+  styleUrls: ['./add-delivery.component.css']
 })
-export class AddUserComponent implements OnInit{
-  usersForm: FormGroup;
+export class AddDeliveryComponent implements OnInit {
+  deliveryForm: FormGroup;
+  formBuilder: any;
 
   constructor(private _fb: FormBuilder,
-    private _usersService: UsersService,
-    private _dialogRef: MatDialogRef<AddUserComponent>,
+    private _deliveryService: DeliveryService,
+    private _dialogRef: MatDialogRef<AddDeliveryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _coreService: CoreService
   ) {
-    this.usersForm = this._fb.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      phone: ['', Validators.required],
-      password: ['', Validators.required],
-      role:['', Validators.required]
+    this.deliveryForm = this._fb.group({
+      pickup_time: ['', Validators.required],
+      start_time: ['', Validators.required],
+      end_time: ['', Validators.required],
+      location: this._fb.group({
+        lat: ['', Validators.required],
+        lng: ['', Validators.required],
+      }),
     })
   }
 
   ngOnInit(): void {
-    this.usersForm.patchValue(this.data)
+    this.deliveryForm.patchValue(this.data)
   }
 
   onFormSubmit() {
-    if (this.usersForm.valid) {
+    if (this.deliveryForm.valid) {
+      console.log(this.deliveryForm.value)
       if(this.data) {
-        this._usersService.updateUser(this.data._id, this.usersForm.value).subscribe({
+        this._deliveryService.updateDelivery(this.data._id, this.deliveryForm.value).subscribe({
           next: (val: any) => {
-            this._coreService.openSnackBar('User profile updated successfully!', 'done')
+            this._coreService.openSnackBar('Delivery profile updated successfully!', 'done')
             this._dialogRef.close(true);
           },
           error: (err: any) => {
@@ -46,16 +50,16 @@ export class AddUserComponent implements OnInit{
               alert(err.error.message);
             } else {
               // Gestion d'erreur générique
-              alert('Une erreur s\'est produite lors de la modification de l\'utilisateur.');
+              alert('Une erreur s\'est produite lors de la modification de la livraison.');
             }
           }
         });
 
       } else {
 
-        this._usersService.addUser(this.usersForm.value).subscribe({
+        this._deliveryService.addDelivery(this.deliveryForm.value).subscribe({
           next: (val: any) => { 
-            this._coreService.openSnackBar('User added successfully!', 'done')
+            this._coreService.openSnackBar('Delivery added successfully!', 'done')
             this._dialogRef.close(true);
           },
           error: (err: any) => {
@@ -65,7 +69,7 @@ export class AddUserComponent implements OnInit{
               alert(err.error.message);
             } else {
               // Gestion d'erreur générique
-              alert('Une erreur s\'est produite lors de l\'ajout de l\'utilisateur.');
+              alert('Une erreur s\'est produite lors de l\'ajout de la livraison.');
             }
           }
         });
