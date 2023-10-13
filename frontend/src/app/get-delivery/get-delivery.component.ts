@@ -6,6 +6,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CoreService } from '../core/core.service';
 import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
+import { PackagesService } from '../services/packages.service';
 
 @Component({
   selector: 'app-get-delivery',
@@ -14,7 +15,7 @@ import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
 })
 export class GetDeliveryComponent implements OnInit{
 
-  displayedColumns: string[] = ['pickup_time', 'start_time', 'end_time', 'status', 'location.lat', 'location.long', 'action',];
+  displayedColumns: string[] = ['description', 'pickup_time', 'start_time', 'end_time', 'status', 'location.lat', 'location.lng', 'action',];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -23,6 +24,7 @@ export class GetDeliveryComponent implements OnInit{
   constructor(
     private _dialog: MatDialog,
     private _deliveryService: DeliveryService,
+    private _packageService: PackagesService,
     private _coreService: CoreService
   ) { }
 
@@ -42,10 +44,16 @@ export class GetDeliveryComponent implements OnInit{
 
   getDelivery() {
     this._deliveryService.getDelivery().subscribe({
-      next: (res: any) => {
+      next: async (res: any) => {
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator
+        this.dataSource.paginator = this.paginator;
+
+        // Récupération des informations du package pour chaque delivery
+        for (const delivery of res) {
+          const packageData = await this._packageService.getPackageById(delivery.package_id).toPromise();
+          delivery.package = packageData; // Ajoutez les informations du package aux données de livraison
+        }
         console.log(res)
       },
       error: console.log

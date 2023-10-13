@@ -3,12 +3,20 @@ const Package = require('../models/package')
 
 // Create a new delivery
 exports.addDelivery = async (req, res) => {
-  const delivery = req.body
-
+  const delivery = {
+    // pickup_time: req.body.pickup_time,
+    // start_time: req.body.start_time,
+    // end_time: req.body.end_time,
+    // location: {
+    //   lat: req.body.lat,
+    //   lng: req.body.lng
+    // }
+    package_id: req.body.packageId
+  }
   // Validation de la requete
 
-  if (!delivery.pickup_time || !delivery.start_time || !delivery.end_time || !delivery.location) {
-    return res.status(500).json({ message: 'All fields are required to add a delivery' })
+  if (!delivery.package_id) {
+    return res.status(500).json({ message: 'Package id doesn\'t match' })
   } else {
     try {
       // Verifier si le package existe

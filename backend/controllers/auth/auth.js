@@ -164,7 +164,7 @@ exports.login = async (req, res, next) => {
           } else if (user.email_verified === false) {
             return res.status(401).json({ message: 'Email not verified' })
           } else if (user.is_active === false) {
-            return res.status(401).json({ message: 'Compte is not available' })
+            return res.status(401).json({ message: 'Account is deactivate. Please contact the admin' })
           } else {
             return res.status(401).json({ message: 'You are not authorized to login' })
           }

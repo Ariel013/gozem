@@ -25,5 +25,9 @@ export class PackagesService {
   deletePackages(id: string): Observable<any> {
     return this._http.delete(`http://localhost:5000/api/package/${id}`);
   }
+
+  getPackageById(id: string): Observable<any> {
+    return this._http.get(`http://localhost:5000/api/package/${id}`)
+  }
 }
 

@@ -6,14 +6,15 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CoreService } from '../core/core.service';
+import { DeliveryService } from '../services/delivery.service';
 
 @Component({
   selector: 'app-get-package',
   templateUrl: './get-package.component.html',
   styleUrls: ['./get-package.component.css']
 })
-export class GetPackageComponent implements OnInit{
-  displayedColumns: string[] = ['description', 'weight', 'width', 'from_name', 'to_name', 'action'];
+export class GetPackageComponent implements OnInit {
+  displayedColumns: string[] = ['description', 'weight', 'width', 'from_name', 'to_name', 'action', 'add'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -22,7 +23,8 @@ export class GetPackageComponent implements OnInit{
   constructor(
     private _dialog: MatDialog,
     private _packagesService: PackagesService,
-    private _coreService: CoreService
+    private _coreService: CoreService,
+    private _deliveryService: DeliveryService
   ) { }
 
   ngOnInit(): void {
@@ -84,5 +86,33 @@ export class GetPackageComponent implements OnInit{
       }
     })
 
+  }
+
+  onAddDeliveryClick(packageId: string) {
+
+    // Création d'un objet pour la nouvelle livraison
+    const newDelivery = {
+      packageId: packageId, // Utilisez l'ID du package
+      // Autres propriétés de la livraison (pickup_time, start_time, end_time, etc.)
+    };
+
+    // Appel du service d'ajout de livraison
+    this._deliveryService.addDelivery(newDelivery).subscribe({
+      next: (val: any) => {
+        this._coreService.openSnackBar('Delivery added successfully!', 'done');
+      },
+      error: (err: any) => {
+        console.error(err);
+        if (err.error && err.error.message) {
+          // Affichage du message d'erreur renvoyé par le serveur
+          alert(err.error.message);
+        } else {
+          // Gestion d'erreur générique
+          alert('Une erreur s\'est produite lors de l\'ajout de la livraison.');
+        }
+      }
+    });
+
+    console.log('Bouton "Add Delivery" cliqué pour le package avec l\'ID:', packageId);
   }
 }

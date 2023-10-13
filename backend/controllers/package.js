@@ -5,7 +5,25 @@ const Package = require('../models/package')
 
 // Create a new package
 exports.addPackage = async (req, res) => {
-  const pack = req.body
+  const pack = {
+    description: req.body.description,
+    weight: req.body.weight,
+    width: req.body.width,
+    height: req.body.height,
+    depth: req.body.depth,
+    from_name: req.body.from_name,
+    from_address: req.body.from_address,
+    from_location: {
+      lat: req.body.from_lat,
+      lng: req.body.from_lng
+    },
+    to_name: req.body.to_name,
+    to_address: req.body.to_address,
+    to_location: {
+      lat: req.body.to_lat,
+      lng: req.body.to_lng
+    }
+  }
 
   // Validation de la requete
 

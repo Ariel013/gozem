@@ -6,25 +6,25 @@ const DeliverySchema = new Mongoose.Schema({
     // required: true
   },
   pickup_time: {
-    type: Date,
-    required: true
+    type: Date
+    // required: true
   },
   start_time: {
-    type: Date,
-    required: true
+    type: Date
+    // required: true
   },
   end_time: {
-    type: Date,
-    required: true
+    type: Date
+    // required: true
   },
   location: {
     lat: {
-      type: Number,
-      required: true
+      type: Number
+      // required: true
     },
     lng: {
-      type: Number,
-      required: true
+      type: Number
+      // required: true
     }
   },
   status: {

@@ -9,7 +9,7 @@ import { CoreService } from '../core/core.service';
   templateUrl: './add-package.component.html',
   styleUrls: ['./add-package.component.css']
 })
-export class AddPackageComponent implements OnInit{
+export class AddPackageComponent implements OnInit {
   packagesForm: FormGroup;
   formBuilder: any;
 
@@ -27,16 +27,12 @@ export class AddPackageComponent implements OnInit{
       depth: ['', Validators.required],
       from_name: ['', Validators.required],
       from_address: ['', Validators.required],
-      from_location: this._fb.group({
-        lat: ['', Validators.required],
-        lng: ['', Validators.required],
-      }),
+      from_lat: ['', Validators.required],
+      from_lng: ['', Validators.required],
       to_name: ['', Validators.required],
       to_address: ['', Validators.required],
-      to_location: this._fb.group({
-        lat: ['', Validators.required],
-        lng: ['', Validators.required],
-      }),
+      to_lat: ['', Validators.required],
+      to_lng: ['', Validators.required],
 
     })
   }
@@ -48,7 +44,7 @@ export class AddPackageComponent implements OnInit{
   onFormPackageSubmit() {
     if (this.packagesForm.valid) {
       console.log('Données du formulaire à envoyer au backend :', this.packagesForm.value);
-      if(this.data) {
+      if (this.data) {
         this._packagesService.updatePackage(this.data._id, this.packagesForm.value).subscribe({
           next: (val: any) => {
             this._coreService.openSnackBar('Package details updated successfully!', 'done')
@@ -67,9 +63,8 @@ export class AddPackageComponent implements OnInit{
         });
 
       } else {
-
         this._packagesService.addPackage(this.packagesForm.value).subscribe({
-          next: (val: any) => { 
+          next: (val: any) => {
             this._coreService.openSnackBar('Package added successfully!', 'done')
             this._dialogRef.close(true);
           },

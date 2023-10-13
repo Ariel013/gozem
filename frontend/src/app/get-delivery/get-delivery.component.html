@@ -19,9 +19,9 @@
           <td mat-cell *matCellDef="let row"> {{row.location.lat}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="location.long">
+        <ng-container matColumnDef="location.lng">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Longitude </th>
-            <td mat-cell *matCellDef="let row"> {{row.location.long}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.location.lng}} </td>
         </ng-container>
   
         <!-- Pickup_Time Column -->
@@ -47,6 +47,12 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
             <td mat-cell *matCellDef="let row"> {{row.status}} </td>
           </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description du package</th>
+          <td mat-cell *matCellDef="let row"> {{row.package.description}} </td>
+        </ng-container>
   
         <!-- Action Column -->
         <ng-container matColumnDef="action">

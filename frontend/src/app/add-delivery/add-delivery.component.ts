@@ -23,10 +23,8 @@ export class AddDeliveryComponent implements OnInit {
       pickup_time: ['', Validators.required],
       start_time: ['', Validators.required],
       end_time: ['', Validators.required],
-      location: this._fb.group({
-        lat: ['', Validators.required],
-        long: ['', Validators.required],
-      }),
+      lat: ['', Validators.required],
+      lng: ['', Validators.required],
     })
   }
 
@@ -37,7 +35,7 @@ export class AddDeliveryComponent implements OnInit {
   onFormSubmit() {
     if (this.deliveryForm.valid) {
       console.log(this.deliveryForm.value)
-      if(this.data) {
+      if (this.data) {
         this._deliveryService.updateDelivery(this.data._id, this.deliveryForm.value).subscribe({
           next: (val: any) => {
             this._coreService.openSnackBar('Delivery profile updated successfully!', 'done')
@@ -58,7 +56,7 @@ export class AddDeliveryComponent implements OnInit {
       } else {
 
         this._deliveryService.addDelivery(this.deliveryForm.value).subscribe({
-          next: (val: any) => { 
+          next: (val: any) => {
             this._coreService.openSnackBar('Delivery added successfully!', 'done')
             this._dialogRef.close(true);
           },
