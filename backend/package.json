@@ -19,6 +19,7 @@
     "mongoose": "^7.6.1",
     "nodemailer": "^6.9.6",
     "nodemon": "^3.0.1",
+    "socket.io": "^4.7.2",
     "ws": "^8.14.2"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 // Import des modules nécessaires
 const express = require('express')
 const http = require('http')
-const WebSocket = require('ws')
+// const socketIo = require('socket.io')
 
 const cors = require('cors')
 const connectDB = require('./config/db')
@@ -19,13 +19,44 @@ const app = express()
 const server = http.createServer(app)
 
 // Configuration des connexions WebSocket
-const wss = new WebSocket.Server({ server })
+
+// const io = socketIo(server)
+const io = require('socket.io')(server, {
+  cors: {
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    allowedHeaders: ['my-custom-header'],
+    credentials: true
+  }
+})
+
+io.on('connection', (socket) => {
+  console.log('Client connecté')
+
+  // Écoute des événements de changement de statut et de localisation
+  socket.on('update_status', (data) => {
+    // Mettez à jour le statut en base de données avec data.delivery_id et data.newStatus
+    // Diffusez ensuite le changement de statut à tous les clients connectés
+    io.emit('status_changed', data)
+  })
+
+  socket.on('update_location', (locationUpdate) => {
+    // Mettez à jour la localisation en base de données avec data.delivery_id et data.location
+    // Diffusez ensuite la mise à jour de la localisation à tous les clients connectés
+    io.emit('location_changed', locationUpdate)
+  })
+})
 
 // Chargement des variables d'environnement depuis le fichier .env
 require('dotenv').config()
 
+const corsOptions = {
+  origin: 'http://localhost:4200', // Autoriser uniquement ce domaine
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE']
+}
+
 // Middleware pour gérer les CORS
-app.use(cors())
+app.use(cors(corsOptions))
 
 // Middleware pour analyser les données JSON dans les requêtes
 app.use(express.json())
@@ -45,17 +76,6 @@ connectDB()
 process.on('unhandledRejection', (err) => {
   console.log(`An error occurred: ${err.message}`)
   server.close(() => process.exit(1))
-})
-
-// Gestionnaires d'événements WebSocket
-wss.on('connection', (ws) => {
-  console.log('New WebSocket Connection Established.')
-
-  // Gestionnaire pour les messages WebSocket entrants
-  ws.on('message', (message) => {
-    console.log('WebSocket Message Received:', message)
-    // Handle the WebSocket message here
-  })
 })
 
 // Routes
