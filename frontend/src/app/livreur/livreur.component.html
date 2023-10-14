@@ -19,17 +19,18 @@
                     <mat-label>
                         <h1><strong>Package Details</strong></h1>
                     </mat-label>
-                    <!-- <div>
+                    <div>
                         <div>
-                            <mat-label>Description: {{ deliveryDetails && deliveryDetails.package.description }}</mat-label>
+                            <mat-label>Description: {{ deliveryDetails?.package?.description }}</mat-label>
                         </div>
                         <div>
-                            <mat-label>Weight: {{ deliveryDetails && deliveryDetails.package.weight }}</mat-label>
+                            <mat-label>Weight: {{ deliveryDetails?.package?.weight }}</mat-label>
                         </div>
                         <div>
-                            <mat-label>Width: {{ deliveryDetails && deliveryDetails.package.width }}</mat-label>
+                            <mat-label>Width: {{ deliveryDetails?.package?.width }}</mat-label>
                         </div>
-                    </div> -->
+                    </div>
+
                 </div>
                 <div class="delivery">
                     <mat-label>
@@ -44,6 +45,7 @@
                             <mat-label>End Time: {{ deliveryDetails && deliveryDetails ? (deliveryDetails.start_time |
                                 date: 'dd-MM-yyyy HH:mm') : 'N/A' }}</mat-label>
                         </div>
+
                     </div>
 
                 </div>

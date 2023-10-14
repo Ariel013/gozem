@@ -12,10 +12,7 @@ import { io } from 'socket.io-client';
 export class LivreurComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   deliveryDetails: any; // Variable pour stocker les détails du delivery
-
   socket: any
-  // Initialisation de la connexion websocket
-
 
   constructor(private fb: FormBuilder,
     private _deliveryService: DeliveryService,
@@ -61,32 +58,39 @@ export class LivreurComponent implements OnInit, OnDestroy {
     this.locationUpdateInterval = setInterval(() => this.updateLocationPeriodically(), 20000);
   }
 
-  onSubmit() {
+  async onSubmit() {
     const idControl = this.searchForm.get('id');
-
+  
     if (idControl) {
-      console.log(idControl)
-
       const deliveryId = idControl.value;
-
-      // Appel du service pour effectuer la recherche du delivery avec son ID
-      this._deliveryService.getDeliveryById(deliveryId).subscribe({
-        next: (response: any) => {
-          this.deliveryDetails = response;
-          // console.log(this.deliveryDetails)
-
-          this._deliveryService.getPackageById(this.deliveryDetails.package_id)
-
-        },
-        error: (err: any) => {
-          console.error(err)
+  
+      try {
+        // Appel du service pour effectuer la recherche du delivery avec son ID
+        const response: any = await this._deliveryService.getDeliveryById(deliveryId).toPromise();
+        this.deliveryDetails = response;
+  
+        if (this.deliveryDetails && this.deliveryDetails.package_id) {
+          // Appel du service pour obtenir les informations du package
+          const packageData: any = await this._packagesService.getPackageById(this.deliveryDetails.package_id).toPromise();
+          
+          // Assurez-vous que les données du package sont disponibles
+          if (packageData) {
+            // Ajoutez les informations du package aux détails de la livraison
+            this.deliveryDetails.package = packageData;
+          } else {
+            console.error('Les informations du package sont indisponibles.');
+          }
+        } else {
+          console.error('L\'ID du package est manquant dans les détails de la livraison.');
         }
-      })
+      } catch (error) {
+        console.error('Une erreur s\'est produite lors de la recherche de la livraison :', error);
+      }
     } else {
       alert('Une erreur s\'est produite lors de la recherche de la livraison.');
-
     }
   }
+  
 
   updateStatus(newStatus: string) {
     // Récupération de la position du livreur
