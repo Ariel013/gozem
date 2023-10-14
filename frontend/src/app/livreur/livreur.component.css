@@ -34,11 +34,22 @@
 .children1 {
     width: 34%;
 }
+
+
 .children2 {
     width: 46%;
     border: 3px solid;
+
+
+   
     /* border-radius: 2rem; */
 }
+.map-frame {
+    border: 2px solid black;
+    height: 100%;
+}
+
+
 .children3 {
     width: 20%;
     margin: 10px;

@@ -34,6 +34,7 @@ import { LivreurComponent } from './livreur/livreur.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import {MatListModule} from '@angular/material/list';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LivreurComponent,
     SideBarComponent,
     DashboardComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatSortModule,
     MatSnackBarModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
