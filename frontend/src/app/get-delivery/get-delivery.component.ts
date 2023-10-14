@@ -54,7 +54,7 @@ export class GetDeliveryComponent implements OnInit{
           const packageData = await this._packageService.getPackageById(delivery.package_id).toPromise();
           delivery.package = packageData; // Ajoutez les informations du package aux données de livraison
         }
-        console.log(res)
+        // console.log(res)
       },
       error: console.log
     })

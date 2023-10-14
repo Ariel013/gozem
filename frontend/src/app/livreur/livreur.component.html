@@ -1,9 +1,9 @@
-<div class="container" style="padding-left: 10%; padding-right: 10%;">
+<div class="container">
     <div class="row" style="margin-top: 90px;">
 
-        <form class="formulaire">
+        <form class="formulaire" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
             <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Email</mat-label>
+                <mat-label>ID</mat-label>
                 <input class="full-width beauty" type="string" placeholder="Enter ID" formControlName="id">
             </mat-form-field>
             <div class="container">
@@ -19,34 +19,50 @@
                     <mat-label>
                         <h1><strong>Package Details</strong></h1>
                     </mat-label>
-                    <mat-label>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem suscipit dignissimos
-                        tempora beatae maiores sit asperiores, distinctio odit nihil qui iste quidem id rerum quisquam
-                        sint cupiditate fugiat blanditiis! Quod?</mat-label>
+                    <!-- <div>
+                        <div>
+                            <mat-label>Description: {{ deliveryDetails && deliveryDetails.package.description }}</mat-label>
+                        </div>
+                        <div>
+                            <mat-label>Weight: {{ deliveryDetails && deliveryDetails.package.weight }}</mat-label>
+                        </div>
+                        <div>
+                            <mat-label>Width: {{ deliveryDetails && deliveryDetails.package.width }}</mat-label>
+                        </div>
+                    </div> -->
                 </div>
                 <div class="delivery">
                     <mat-label>
                         <h1><strong>Delivery Details</strong></h1>
                     </mat-label>
-                    <mat-label>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, aliquam at numquam
-                        repellendus neque iste adipisci. Sit eligendi porro et molestias, quia labore exercitationem
-                        perspiciatis reiciendis accusamus pariatur qui. Similique?</mat-label>
+                    <div>
+                        <div>
+                            <mat-label>Start Time: {{ deliveryDetails && deliveryDetails ? (deliveryDetails.end_time |
+                                date: 'dd-MM-yyyy HH:mm') : 'N/A' }}</mat-label>
+                        </div>
+                        <div>
+                            <mat-label>End Time: {{ deliveryDetails && deliveryDetails ? (deliveryDetails.start_time |
+                                date: 'dd-MM-yyyy HH:mm') : 'N/A' }}</mat-label>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <!-- 2 -->
-            <div class="children2">MAP</div >
+            <div class="children2">MAP</div>
             <!-- 3 -->
             <div class="children3">
                 <div class="children4">
-                    <button class="but" mat-raised-button color="primary">Submit</button>
+                    <button class="but" mat-raised-button color="primary" (click)="updateStatus('picked-up')">Picked-Up</button>
                 </div>
                 <div class="children4">
-                    <button class="but" mat-raised-button color="primary">In-Transit</button>
+                    <button class="but" mat-raised-button color="primary" (click)="updateStatus('in-transit')">In-Transit</button>
                 </div>
                 <div class="children4">
-                    <button class="but" mat-raised-button color="primary">Delivered</button>
+                    <button class="but" mat-raised-button color="primary" (click)="updateStatus('delivered')">Delivered</button>
                 </div>
                 <div class="children4">
-                    <button class="but" mat-raised-button color="primary">Failed</button>
+                    <button class="but" mat-raised-button color="primary" (click)="updateStatus('failed')">Failed</button>
                 </div>
             </div>
 

@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DeliveryService {
+  getPackageById(package_id: any) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private _http: HttpClient) { }
 

@@ -65,6 +65,9 @@ exports.updateDelivery = async (req, res) => {
     if (delivery.location) {
       deliveryToUpdate.location = delivery.location
     }
+    if (delivery.status) {
+      deliveryToUpdate.status = delivery.status
+    }
 
     await deliveryToUpdate.save()
     return res.status(200).json({ message: 'Informations de la livraison mis à jour avec succès' })
