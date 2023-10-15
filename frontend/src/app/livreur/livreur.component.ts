@@ -60,19 +60,19 @@ export class LivreurComponent implements OnInit, OnDestroy {
 
   async onSubmit() {
     const idControl = this.searchForm.get('id');
-  
+
     if (idControl) {
       const deliveryId = idControl.value;
-  
+
       try {
         // Appel du service pour effectuer la recherche du delivery avec son ID
         const response: any = await this._deliveryService.getDeliveryById(deliveryId).toPromise();
         this.deliveryDetails = response;
-  
+
         if (this.deliveryDetails && this.deliveryDetails.package_id) {
           // Appel du service pour obtenir les informations du package
           const packageData: any = await this._packagesService.getPackageById(this.deliveryDetails.package_id).toPromise();
-          
+
           // Assurez-vous que les données du package sont disponibles
           if (packageData) {
             // Ajoutez les informations du package aux détails de la livraison
@@ -90,7 +90,7 @@ export class LivreurComponent implements OnInit, OnDestroy {
       alert('Une erreur s\'est produite lors de la recherche de la livraison.');
     }
   }
-  
+
 
   updateStatus(newStatus: string) {
     // Récupération de la position du livreur
@@ -109,16 +109,20 @@ export class LivreurComponent implements OnInit, OnDestroy {
               this.deliveryDetails.status = newStatus;
               console.log(newStatus);
 
+              let newPick: Date | undefined;
+              let newStart: Date | undefined;
+              let newEnd: Date | undefined;
+
               if (newStatus === 'picked-up' && !this.deliveryDetails.pickup_time) {
-                this.deliveryDetails.pickup_time = new Date();
+                newPick = new Date();
               } else if (newStatus === 'in-transit' && !this.deliveryDetails.start_time) {
-                this.deliveryDetails.start_time = new Date();
+                newStart = new Date();
               } else if ((newStatus === 'delivered' || newStatus === 'failed') && !this.deliveryDetails.end_time) {
-                this.deliveryDetails.end_time = new Date();
+                newEnd = new Date();
               }
 
               // Création d'un JSON pour le statut
-              const requestBody = { status: newStatus, location: { lat, lng } }
+              const requestBody = { status: newStatus, location: { lat, lng }, pickup_time: newPick, start_time: newStart, end_time: newEnd }
 
               // Mise à jour du statut
               this._deliveryService.updateDelivery(this.deliveryDetails._id, requestBody).subscribe(

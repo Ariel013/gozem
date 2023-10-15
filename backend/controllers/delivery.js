@@ -4,13 +4,6 @@ const Package = require('../models/package')
 // Create a new delivery
 exports.addDelivery = async (req, res) => {
   const delivery = {
-    // pickup_time: req.body.pickup_time,
-    // start_time: req.body.start_time,
-    // end_time: req.body.end_time,
-    // location: {
-    //   lat: req.body.lat,
-    //   lng: req.body.lng
-    // }
     package_id: req.body.packageId
   }
   // Validation de la requete
@@ -28,8 +21,9 @@ exports.addDelivery = async (req, res) => {
       }
       // Création du delivery
       delivery.status = 'open'
-      await Delivery.create(delivery)
-      return res.status(201).json({ message: 'Delivery created successfully' })
+      const createdDelivery = await Delivery.create(delivery)
+      // Retourner le delivery qui vient d'etre crée
+      return res.status(201).json({ message: 'Delivery created successfully', delivery_id: createdDelivery._id })
     } catch (error) {
       console.error('Erreur lors de la création de la livraison', error)
       res.status(500).json({

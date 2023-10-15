@@ -60,6 +60,9 @@ exports.updatePackage = async (req, res) => {
     if (packUpdates.description) {
       packToUpdate.description = packUpdates.description
     }
+    if (packUpdates.active_delivery_id) {
+      packToUpdate.active_delivery_id = packUpdates.active_delivery_id
+    }
     if (packUpdates.weight) {
       packToUpdate.weight = packUpdates.weight
     }

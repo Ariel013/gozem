@@ -54,7 +54,7 @@ const routes: Routes = [
   { path: "sidebar", component: SideBarComponent },
 
   // Maps
-  { path: "maps", component: MapsComponent },
+  { path: "maps/:id", component: MapsComponent },
 
   // dashboard
   { path: "dashboard", component: DashboardComponent,

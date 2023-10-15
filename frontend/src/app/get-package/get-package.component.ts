@@ -89,16 +89,26 @@ export class GetPackageComponent implements OnInit {
   }
 
   onAddDeliveryClick(packageId: string) {
+    console.log('Je suis là', packageId)
 
     // Création d'un objet pour la nouvelle livraison
     const newDelivery = {
-      packageId: packageId, // Utilisez l'ID du package
-      // Autres propriétés de la livraison (pickup_time, start_time, end_time, etc.)
+      packageId: packageId,
     };
 
     // Appel du service d'ajout de livraison
     this._deliveryService.addDelivery(newDelivery).subscribe({
-      next: (val: any) => {
+      next: (res: any) => {
+        console.log('Reponse from server', res)
+        console.log('Reponse from server', newDelivery)
+
+
+        const active_delivery_id = res.delivery_id
+
+        // Mise à jour de la valeur du active_delivery_id
+        this.updatePackageActiveDelivery(packageId, active_delivery_id)
+
+
         this._coreService.openSnackBar('Delivery added successfully!', 'done');
       },
       error: (err: any) => {
@@ -114,5 +124,16 @@ export class GetPackageComponent implements OnInit {
     });
 
     console.log('Bouton "Add Delivery" cliqué pour le package avec l\'ID:', packageId);
+  }
+
+  updatePackageActiveDelivery(packageId: string, deliveryId: string) {
+    this._packagesService.updatePackage(packageId, deliveryId).subscribe({
+      next: (result: any) => {
+        console.log('Le Champ active_delivery_id a été mis à jour avec succès')
+      },
+      error: (err: any) => {
+        console.error(err)
+      }
+    })
   }
 }
