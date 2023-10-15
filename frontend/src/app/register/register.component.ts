@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
 
       this._registerService.register(this.registerForm.value).subscribe({
         next: (val: any) => {
-          this._coreService.openSnackBar('User added successfully!', 'done')
+          this._coreService.openSnackBar('Compte crée avec succès!, Veuillez s\'il-vous-plait consulter vos mails pour valider le compte', 'done')
           // this._dialogRef.close(true);
         },
         error: (err: any) => {

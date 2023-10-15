@@ -42,8 +42,10 @@
                         <input class="full-width beauty" type="password" placeholder="Password" formControlName="password">
                     </mat-form-field>
 
-                    <div class="container text-center">
-                        <button mat-raised-button color="primary">Register</button>
+                    <div class="container text-center" style="display: flex;">
+                        <button  mat-raised-button color="primary" style="margin-right: 10px;">Register</button>
+                        <button  mat-raised-button color="primary"><a [routerLink]="['/login']">Login</a></button>
+                        
                     </div>
 
                 </form>

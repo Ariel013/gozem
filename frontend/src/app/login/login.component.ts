@@ -45,13 +45,14 @@ export class LoginComponent implements OnInit {
 
           // Recupération du role de l'utilisateur
           this._loginService.getUserRole().subscribe({
-            next: (role: string) => {
+            next: (role: any) => {
+              // console.log('Role est:', role)
               // Redirection de l'utilisateur
-              if (role === 'admin') {
+              if (role.role === 'admin') {
                 this.router.navigate(['/dashboard']);
-              } else if (role === 'livreur') {
+              } else if (role.role === 'livreur') {
                 this.router.navigate(['/livreur'])
-              } else if (role === 'user') {
+              } else if (role.role === 'user') {
                 this.router.navigate(['/index'])
               } else {
                 alert ('Role inconnu')
