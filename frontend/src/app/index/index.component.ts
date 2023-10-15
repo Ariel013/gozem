@@ -39,6 +39,7 @@ export class IndexComponent {
         // Appel du service pour effectuer la recherche du package avec son ID
         const response: any = await this._packagesService.getPackageById(packageId).toPromise();
         this.packageDetails = response;
+        // console.log(this.packageDetails)
   
         if (this.packageDetails && this.packageDetails.active_delivery_id) {
           // Appel du service pour obtenir les informations du delivery

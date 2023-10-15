@@ -26,71 +26,86 @@ export class MapsComponent implements OnInit, AfterViewInit {
     this.route.params.subscribe(async (params) => {
       this.entityId = params['id'];
 
-      // Appel du service pour effectuer la recherche du delivery avec son ID
+      let packageResponse: any;
+
       try {
+        // Tentative de recherche sur le modèle package
+        packageResponse = await this._packagesService.getPackageById(this.entityId).toPromise();
+      } catch (error) {
+        // Si une erreur se produit, nous supposons que c'est un ID de delivery et essayons le modèle de delivery
+      }
 
-        // CHerchons si l'ID correspond à un active_delivery_id
-        const packageResponse: any = await this._packagesService.getPackageById(this.entityId).toPromise
+      if (packageResponse) {
         this.packageDetails = packageResponse;
+        if (this.packageDetails.active_delivery_id) {
+          // Si un delivery actif est associé au package
+          // console.log(this.packageDetails.active_delivery_id)
 
-        if(this.packageDetails) {
-          if (this.packageDetails.active_delivery_id) {
-            // Si un delivery actif est associé au package
-            const deliveryResponse: any = await this._deliveryService.getDeliveryById(this.packageDetails.active_delivery_id).toPromise();
-            if (deliveryResponse && deliveryResponse.location) {
-              const lat = deliveryResponse.location.lat;
-              const lng = deliveryResponse.location.lng;
-              this.initializeMap(lat, lng);
-            }
+          const deliveryResponse: any = await this._deliveryService.getDeliveryById(this.packageDetails.active_delivery_id).toPromise();
+          if (deliveryResponse && deliveryResponse.location) {
+            const lat = deliveryResponse.location.lat;
+            const lng = deliveryResponse.location.lng;
+            this.initializeMap(lat, lng);
+          } else {
+            console.error('Coordonnées de localisation manquantes dans les détails de la livraison.');
           }
-        } else if (this.packageDetails.from_location){
+        } else if (this.packageDetails.from_location) {
           // SI on ne trouve pas de delivery actif on prend la localisation su package
           const lat = this.packageDetails.from_location.lat;
           const lng = this.packageDetails.from_location.lng
           this.initializeMap(lat, lng);
         } else {
-          console.error('Coordonnées de localisation manquantes dans les détails de la livraison.');
+          console.error('Coordonnées de localisation manquantes dans les détails de la livraison.')
         }
-      } catch (error) {
-        console.error('Erreur lors de la recherche de la livraison :', error);
+
+      } else {
+        // Faire la recherche dans le model delivery
+        const deliveryResponse: any = await this._deliveryService.getDeliveryById(this.entityId).toPromise();
+        if (deliveryResponse && deliveryResponse.location) {
+          const lat = deliveryResponse.location.lat;
+          const lng = deliveryResponse.location.lng;
+          this.initializeMap(lat, lng);
+        } else {
+          console.error('Coordonnées de localisation manquantes dans les détails de la livraison.');
+        };
       }
 
-    });
+    })
   }
 
   ngAfterViewInit() {
-    const loader = new Loader({
-      apiKey: 'AIzaSyABllXWc735BWqURbAcpxsPqaBl4HGPYGg'
-    });
+      const loader = new Loader({
+        apiKey: 'AIzaSyABllXWc735BWqURbAcpxsPqaBl4HGPYGg'
+      });
 
-    loader.load().then(() => {
-      console.log('Carte chargée');
-      // this.initializeMap();
-    });
-  }
+      loader.load().then(() => {
+        console.log('Carte chargée');
+        // this.initializeMap();
+      });
+    }
 
   initializeMap(lat: number, lng: number) {
-    const mapOptions: google.maps.MapOptions = {
-      center: { lat, lng },
-      zoom: 12,
-    };
-
-    const mapElement = document.getElementById('map');
-    if (mapElement) {
-      this.map = new google.maps.Map(mapElement, mapOptions)
-
-      // Marker
-      const markerOptions: google.maps.MarkerOptions = {
-        position: { lat, lng },
-        map: this.map,
-        title: 'Position de votre colis'
+      const mapOptions: google.maps.MapOptions = {
+        center: { lat, lng },
+        zoom: 12,
       };
 
-      this.marker = new google.maps.Marker(markerOptions);
+      const mapElement = document.getElementById('map');
+      if(mapElement) {
+        this.map = new google.maps.Map(mapElement, mapOptions)
 
-    } else {
-      console.error('Élément "map" introuvable.');
+        // Marker
+        const markerOptions: google.maps.MarkerOptions = {
+          position: { lat, lng },
+          map: this.map,
+          title: 'Position de votre colis'
+        };
 
+        this.marker = new google.maps.Marker(markerOptions);
+
+      } else {
+        console.error('Élément "map" introuvable.');
+
+      }
     }
-  }
 }
