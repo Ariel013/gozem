@@ -32,21 +32,15 @@
     padding-top: 20px;
 }
 .children1 {
-    width: 34%;
+    width: 20%;
 }
 
 
 .children2 {
-    width: 46%;
+    width: 60%;
     border: 3px solid;
 
-
-   
     /* border-radius: 2rem; */
-}
-.map-frame {
-    border: 2px solid black;
-    height: 100%;
 }
 
 

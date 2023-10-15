@@ -23,6 +23,7 @@ import { IndexComponent } from './index/index.component';
 import { LivreurComponent } from './livreur/livreur.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MapsComponent } from './maps/maps.component';
 
 const routes: Routes = [
   // users view
@@ -51,6 +52,9 @@ const routes: Routes = [
 
   // sideBar
   { path: "sidebar", component: SideBarComponent },
+
+  // Maps
+  { path: "maps", component: MapsComponent },
 
   // dashboard
   { path: "dashboard", component: DashboardComponent,

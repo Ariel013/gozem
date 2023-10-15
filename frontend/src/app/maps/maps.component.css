@@ -1,0 +1,12 @@
+.full {
+    width: 100%;
+    height: 100%;
+}
+
+.map-container {
+    width: 100%; /* Définit la largeur de la div parente */
+    height: 50vh; /* Définit la hauteur de la div parente (50% de la hauteur de la fenêtre) */
+    display: flex; /* Utilisez un modèle de boîte flexible pour centrer la carte */
+    justify-content: center; /* Centre horizontalement le contenu de la div parente */
+    align-items: center; /* Centre verticalement le contenu de la div parente */
+}

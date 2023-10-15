@@ -34,6 +34,7 @@ import { LivreurComponent } from './livreur/livreur.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import {MatListModule} from '@angular/material/list';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MapsComponent } from './maps/maps.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LivreurComponent,
     SideBarComponent,
     DashboardComponent,
+    MapsComponent,
   ],
   imports: [
     BrowserModule,
