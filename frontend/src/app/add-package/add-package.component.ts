@@ -43,7 +43,6 @@ export class AddPackageComponent implements OnInit {
 
   onFormPackageSubmit() {
     if (this.packagesForm.valid) {
-      console.log('Données du formulaire à envoyer au backend :', this.packagesForm.value);
       if (this.data) {
         this._packagesService.updatePackage(this.data._id, this.packagesForm.value).subscribe({
           next: (val: any) => {

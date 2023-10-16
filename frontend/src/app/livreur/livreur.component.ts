@@ -59,19 +59,14 @@ export class LivreurComponent implements OnInit, OnDestroy {
 
     if (idControl) {
       const deliveryId = idControl.value;
-    console.log(deliveryId)
-
 
       try {
         // Appel du service pour effectuer la recherche du delivery avec son ID
         const response: any = await this._deliveryService.getDeliveryById(deliveryId).toPromise();
         this.deliveryDetails = response;
-        console.log(this.deliveryDetails)
         if (this.deliveryDetails && this.deliveryDetails.package_id) {
           // Appel du service pour obtenir les informations du package
           const packageData: any = await this._packagesService.getPackageById(this.deliveryDetails.package_id._id).toPromise();
-          console.log('yooooooooooo')
-
           if (packageData) {
             // Ajouter les informations du package aux détails de la livraison
             this.deliveryDetails.package = packageData;
@@ -102,8 +97,6 @@ export class LivreurComponent implements OnInit, OnDestroy {
             // Vérification de la validité du statut
             if (['picked-up', 'in-transit', 'delivered', 'failed'].includes(newStatus)) {
               this.deliveryDetails.status = newStatus;
-              console.log(newStatus);
-
               let newPick: Date | undefined;
               let newStart: Date | undefined;
               let newEnd: Date | undefined;
@@ -122,7 +115,6 @@ export class LivreurComponent implements OnInit, OnDestroy {
               // Mise à jour du statut
               this._deliveryService.updateDelivery(this.deliveryDetails._id, requestBody).subscribe(
                 (response: any) => {
-                  console.log(`Statut mis à jour avec succès: ${newStatus}`)
                 },
                 (error: any) => {
                   console.error(`Erreur lors de la mise à jour du statut: ${error}`)

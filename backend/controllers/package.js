@@ -123,8 +123,6 @@ exports.deletepackage = async (req, res) => {
 exports.getonePackage = async (req, res) => {
   try {
     const packageId = req.params.id
-    console.log(req.params)
-
     // Recherche du package correspondant
     const pack = await Package.findById(packageId).populate('active_delivery_id')
     if (!pack) {

@@ -52,7 +52,6 @@ export class GetDeliveryComponent implements OnInit{
           const packageData = await this._packageService.getPackageById(delivery.package_id).toPromise();
           delivery.package = packageData;
         }
-        console.log(deliveries)
         this.dataSource = new MatTableDataSource(deliveries)
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;

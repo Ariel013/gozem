@@ -88,7 +88,6 @@ export class GetPackageComponent implements OnInit {
   }
 
   onAddDeliveryClick(packageId: string) {
-    console.log('Je suis là', packageId)
 
     // Création d'un objet pour la nouvelle livraison
     const newDelivery = {
@@ -98,8 +97,6 @@ export class GetPackageComponent implements OnInit {
     // Appel du service d'ajout de livraison
     this._deliveryService.addDelivery(newDelivery).subscribe({
       next: (res: any) => {
-        console.log('Reponse from server', res)
-
         const active_delivery_id = res.delivery_id
 
         // Mise à jour de la valeur du active_delivery_id
@@ -126,7 +123,6 @@ export class GetPackageComponent implements OnInit {
   updatePackageActiveDelivery(packageId: string, deliveryId: string) {
     this._packagesService.updatePackage(packageId, deliveryId).subscribe({
       next: (result: any) => {
-        console.log('Le Champ active_delivery_id a été mis à jour avec succès')
       },
       error: (err: any) => {
         console.error(err)

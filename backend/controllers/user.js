@@ -100,7 +100,6 @@ exports.updateUser = async (req, res) => {
     const userToUpdate = await User.findById(userId)
 
     if (!userToUpdate) {
-      // console.log(userToUpdate)
       return res.status(404).json({ error: 'Utilisateur non trouvé' })
     }
 
@@ -157,7 +156,6 @@ exports.deleteuser = async (req, res) => {
 
     // Recherche de l'utilisateur correspondant
     const user = await User.findById(userId)
-    // console.log(pack)
     if (!user) {
       return res.status(404).json({ error: 'Utilisateur non trouvé' })
     }

@@ -189,7 +189,6 @@ exports.getRole = async (req, res) => {
   }
 
   // Verification du token et extraction des informations
-  // console.log(token)
   jwt.verify(token, tokenKey, (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: '  Unauthorized' })

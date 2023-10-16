@@ -31,8 +31,6 @@ export class IndexComponent {
 
   async onSubmit() {
     const idControl = this.searchForm.get('id');
-    // console.log( 'ID Controle', idControl)
-
     if (idControl) {
       const packageId = idControl.value;
 
@@ -45,8 +43,6 @@ export class IndexComponent {
         if (this.packageDetails && this.packageDetails.active_delivery_id) {
           // Appel du service pour obtenir les informations du delivery
           const deliveryData: any = await this._deliveryService.getDeliveryById(this.packageDetails.active_delivery_id).toPromise();
-          // console.log("deliveryData")
-
 
           // Assurez-vous que les données du package sont disponibles
           if (deliveryData) {

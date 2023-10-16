@@ -34,7 +34,6 @@ export class AddDeliveryComponent implements OnInit {
 
   onFormSubmit() {
     if (this.deliveryForm.valid) {
-      console.log(this.deliveryForm.value)
       if (this.data) {
         this._deliveryService.updateDelivery(this.data._id, this.deliveryForm.value).subscribe({
           next: (val: any) => {

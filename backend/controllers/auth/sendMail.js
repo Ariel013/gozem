@@ -15,7 +15,6 @@ exports.sendMail = async (data) => {
   const transporter = nodemailer.createTransport(config)
   try {
     const info = await transporter.sendMail(data)
-    console.log('E-mail envoyé :', info.response)
     return info.response
   } catch (err) {
     console.error('Erreur lors de l\'envoi de l\'e-mail :', err)
