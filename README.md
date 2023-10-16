@@ -42,13 +42,15 @@ git clone https://github.com/Ariel013/gozem.git
 
 Pour faire fonctionner correctement l'application, vous devez configurer les variables d'environnement suivantes dans le fichier .env :
 
-- PORT : Le port sur lequel le serveur doit écouter (par exemple, 3000).
-
-- DATABASE_URL : L'URL de votre base de données (par exemple, mongodb://localhost/nom-de-la-base).
-
-- JWT_SECRET : La clé secrète pour la génération de jetons JWT.
+- PORT : Le port sur lequel le serveur doit écouter (par exemple, 5000).
 
 - FRONT_URL : L'URL de l'interface utilisateur front-end.
+  
+- BACK_URL : L'URL de l'interface utilisateur front-end.
+
+- MONGODB_URI : L'URL de votre base de données (par exemple, mongodb://localhost/nom-de-la-base).
+
+- jwtKey : La clé secrète pour la génération de jetons JWT.
 
 
 #  Lancement de l'Application
@@ -69,17 +71,24 @@ Le backend sera accessible à l'adresse http://localhost:5000/.
 
 `http://localhost:5000/api-docs`
 
+4. Il vous est aussi possible d'utiliser la version dockerizée du projet en remplacant dans le fichier docker-compose.yml le lien de la base de données mongoDB par celui de votre cluster.
+   Si vous n'en avez pas, n'hésitez pas à en créer un et suivez les instructions adéquates.
+
 # Utilisation
 
 
 L'application comprend les fonctionnalités suivantes :
 
-Ajout de livraisons en utilisant l'ID du colis.
-Mise à jour de l'état des livraisons par les livreurs.
-Vérification de l'authentification des utilisateurs à l'aide de tokens JWT.
+- Ajout de livraisons en utilisant l'ID du colis.
+- 
+- Mise à jour de l'état des livraisons par les livreurs.
+- 
+- Vérification de l'authentification des utilisateurs à l'aide de tokens JWT.
 ...
-Authentification et Autorisation
-L'application utilise des tokens JWT pour l'authentification. Un gardien (guard) d'authentification a été mis en place pour vérifier l'authentification de l'utilisateur. De plus, un gardien d'administration est utilisé pour limiter l'accès aux utilisateurs ayant le rôle d'administrateur.
+
+- Authentification et Autorisation
+  
+- L'application utilise des tokens JWT pour l'authentification. Un gardien (guard) d'authentification a été mis en place pour vérifier l'authentification de l'utilisateur. De plus, un gardien d'administration est utilisé pour limiter l'accès aux utilisateurs ayant le rôle d'administrateur.
 
 # Contribution
 

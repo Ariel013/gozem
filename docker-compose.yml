@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  angular:
+    image: node:latest
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 4200:4200
+    environment:
+      corsOrigin: '*'
+    command: bash -c "npm install && ng serve"
+
+
+  expressjs:
+    image: node:latest
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    environment:
+      MONGODB_URI: // Lien de votre cluster
+      PORT: 5000
+      corsOrigin: '*'
+    ports:
+      - 5000:5000
+    # depends_on:
+    #   - mongo
+    command: bash -c "npm install && npm start"
