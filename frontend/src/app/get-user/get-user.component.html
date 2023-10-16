@@ -8,12 +8,12 @@
       <div class="col-md-10">
         <div class="main-body">
 
-          <div style="display: flex; justify-content: space-between;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
             <mat-form-field>
               <mat-label>Filter</mat-label>
               <input matInput (keyup)="applyFilter($event)" placeholder="Ex. User" #input>
             </mat-form-field>
-            <button mat-raised-button (click)="openAddUserForm()">
+            <button style="background-color: rgba(112, 153, 136, 0.26); border-radius: 0.8rem; padding: 5px 10px 5px 10px;" mat-raised-button (click)="openAddUserForm()">
               ADD User
             </button>
           </div>

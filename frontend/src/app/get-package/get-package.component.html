@@ -7,13 +7,13 @@
       </div>
       <div class="col-md-10">
         <div class="main-body">
-          <div style="display: flex; justify-content: space-between;">
-            <mat-form-field>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <mat-form-field style="margin-bottom: 0;">
               <mat-label>Filter</mat-label>
               <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Package" #input>
             </mat-form-field>
-            <button mat-raised-button (click)="openAddPackageForm()">
-              ADD Package
+            <button style="background-color: rgba(112, 153, 136, 0.26); border-radius: 0.8rem; padding: 5px 10px 5px 10px;" (click)="openAddPackageForm()">
+              <span>Add Package</span>
             </button>
           </div>
 
