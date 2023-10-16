@@ -10,7 +10,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit{  
   title = 'frontend';
 
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean = true;
 
   constructor(private authService: AuthService) {}
 

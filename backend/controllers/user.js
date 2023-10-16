@@ -22,7 +22,7 @@ exports.getUsers = async (req, res) => {
     // const totalUser = await User.countDocuments({ $or: [{ role: 'user' }, { role: 'livreur' }] })
 
     // Retour des données paginées
-    res.status(200).json({
+    return res.status(200).json({
       users
       // currentPage: page,
       // totalPages: Math.ceil(totalUser / perPage),

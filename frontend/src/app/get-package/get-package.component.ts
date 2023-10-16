@@ -100,8 +100,6 @@ export class GetPackageComponent implements OnInit {
     this._deliveryService.addDelivery(newDelivery).subscribe({
       next: (res: any) => {
         console.log('Reponse from server', res)
-        console.log('Reponse from server', newDelivery)
-
 
         const active_delivery_id = res.delivery_id
 

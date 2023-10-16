@@ -15,7 +15,7 @@ import { PackagesService } from '../services/packages.service';
 })
 export class GetDeliveryComponent implements OnInit{
 
-  displayedColumns: string[] = ['description', 'pickup_time', 'start_time', 'end_time', 'status', 'location.lat', 'location.lng', 'action',];
+  displayedColumns: string[] = ['description', 'pickup_time', 'start_time', 'end_time', 'status', 'from_location.lat', 'from_location.lng', 'action',];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -45,16 +45,18 @@ export class GetDeliveryComponent implements OnInit{
   getDelivery() {
     this._deliveryService.getDelivery().subscribe({
       next: async (res: any) => {
-        this.dataSource = new MatTableDataSource(res)
+
+        let deliveries = res;
+        // Récupération des informations du package pour chaque delivery
+        for (let delivery of deliveries) {
+          const packageData = await this._packageService.getPackageById(delivery.package_id).toPromise();
+          delivery.package = packageData;
+        }
+        console.log(deliveries)
+        this.dataSource = new MatTableDataSource(deliveries)
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
-        // Récupération des informations du package pour chaque delivery
-        for (const delivery of res) {
-          const packageData = await this._packageService.getPackageById(delivery.package_id).toPromise();
-          delivery.package = packageData; // Ajoutez les informations du package aux données de livraison
-        }
-        // console.log(res)
       },
       error: console.log
     })

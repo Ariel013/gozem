@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +13,62 @@ export class DeliveryService {
   constructor(private _http: HttpClient) { }
 
   addDelivery(data: any): Observable<any> {
-    return this._http.post('http://localhost:5000/api/delivery', data);
+    const token = localStorage.getItem('token');
+
+    if(!token) {
+      return of(null);
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this._http.post('http://localhost:5000/api/delivery', data, { headers });
   }
 
   updateDelivery(id: string, data: any): Observable<any> {
-    return this._http.put(`http://localhost:5000/api/delivery/${id}`, data);
+    const token = localStorage.getItem('token');
+
+    if(!token) {
+      return of(null);
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this._http.put(`http://localhost:5000/api/delivery/${id}`, data, { headers });
   }
 
   getDelivery(): Observable<any> {
-    return this._http.get('http://localhost:5000/api/delivery');
+    const token = localStorage.getItem('token');
+
+    if(!token) {
+      return of(null);
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this._http.get('http://localhost:5000/api/delivery', { headers });
   }
 
   deleteDelivery(id: string): Observable<any> {
-    return this._http.delete(`http://localhost:5000/api/delivery/${id}`);
+    const token = localStorage.getItem('token');
+
+    if(!token) {
+      return of(null);
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this._http.delete(`http://localhost:5000/api/delivery/${id}`, { headers });
   }
 
   getDeliveryById(id: string): Observable<any> {
-    return this._http.get(`http://localhost:5000/api/delivery/${id}`)
+    const token = localStorage.getItem('token');
+
+    if(!token) {
+      return of(null);
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this._http.get(`http://localhost:5000/api/delivery/${id}`, { headers })
   }
 }
