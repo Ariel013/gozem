@@ -1,6 +1,8 @@
 // Import des modules nécessaires
 const express = require('express')
 const http = require('http')
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json')
 // const socketIo = require('socket.io')
 
 const cors = require('cors')
@@ -17,6 +19,9 @@ const app = express()
 
 // Création du serveur HTTP
 const server = http.createServer(app)
+
+// Configure Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // Configuration des connexions WebSocket
 
@@ -80,7 +85,7 @@ process.on('unhandledRejection', (err) => {
 
 // Routes
 app.use('/api/users', authRoute)
-app.use('/api/users', crudUsers)
+app.use('/api', crudUsers)
 app.use('/api', crudPackages)
 app.use('/api', crudDeliveries)
 

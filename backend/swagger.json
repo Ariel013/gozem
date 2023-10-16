@@ -1,0 +1,1057 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Gozem Busines Case's API Routes with Swagger",
+        "description": "This is a simple CRUD API application made with Express and documented with Swagger",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "contact": {
+            "name": "Ariel Kevin SODJINOU",
+            "email": "sodjinoukevin13@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000/api",
+            "description": "Local Development Server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Users",
+            "description": "Routes des users"
+        },
+        {
+            "name": "Package",
+            "description": "Routes de manipulation des Packages"
+        },
+        {
+            "name": "Delivery",
+            "description": "Route de gestion des Livraisons"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "users/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Register a new user",
+                "description": "New hospital registration",
+                "parameters": [],
+                "requestBody": {
+                    "description": "Corps de la requete",
+                    "require": true,
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "name": "Hosto",
+                                "email": "hosto@gmail.com",
+                                "password": "password_minimum_8_caractères",
+                                "role": "user or livreur",
+                                "phone": 13094334
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee2052007b924585edbce6",
+                                    "name": "Test",
+                                    "email": "test@gmail.com",
+                                    "role": "user",
+                                    "phone": 13094334
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "If email, name or phone is already taken",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "User's informations already exists'"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "If a field is missing",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "All fields are required."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Login for user",
+                "description": "Login",
+                "parameters": [],
+                "requestBody": {
+                    "description": "Corps de la requete",
+                    "require": true,
+                    "content": {
+                        "application/json": {
+                            "example": {},
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Login successfully",
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI",
+                                    "role": "user",
+                                    "name": "Test",
+                                    "email": "test@gmail.com"
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Email not verify or compte not avalaible or unhauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Valid email verification or unauthorize"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "If a field is missing",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Something wrong."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return all users",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {},
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If users not found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get a user by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a user profile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee0c9c8d454f077f6f6d5e",
+                                    "name": "Test",
+                                    "email": "test@gmail.com",
+                                    "role": "user",
+                                    "phone": 13094334
+                                },
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If user not found in users",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update a user by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a user profile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Corps de la requête",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "_id": "64ee0c9c8d454f077f6f6d5e",
+                                "name": "Test",
+                                "email": "test@gmail.com",
+                                "password": "password_minimum_8_caractères",
+                                "role": "user",
+                                "phone": 13094334
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "name": "Hospital",
+                                    "email": "hosto@gmail.com",
+                                    "password": "password_crypté",
+                                    "role": "hospital",
+                                    "phone": 13094334
+                                },
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If user not found in users",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete a user by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a user profile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee2052007b924585edbce6",
+                                    "name": "Test",
+                                    "email": "test@gmail.com",
+                                    "role": "user",
+                                    "phone": 12345566
+                                },
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If user not found in users",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/deactivateaccount/{id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Deactivate or activate a user account by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a user profile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {},
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If user not found in users",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/package": {
+            "get": {
+                "tags": [
+                    "Operation"
+                ],
+                "summary": "Get all packages",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return all packages",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "$ref": "#/components/schemas/Package"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/package/{id}": {
+            "get": {
+                "tags": [
+                    "Operation"
+                ],
+                "summary": "Get one package by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a package informations",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee0c9c8d454f077f6f6d5e",
+                                    "description": "Hello",
+                                    "weight": 12,
+                                    "width": 6,
+                                    "height": 8,
+                                    "depth": 7,
+                                    "from_name": "Mickael",
+                                    "from_address": "Avotrou",
+                                    "to_name": "Jackson"
+                                },
+                                "$ref": "#/components/schemas/Package"
+                            }
+                        },
+                        "404": {
+                            "description": "If package not found in packages",
+                            "content": {
+                                "application/json": {
+                                    "example": {
+                                        "message": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Packages"
+                ],
+                "summary": "Update a package by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a package informations",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Corps de la requête",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "_id": "64ee0c9c8d454f077f6f6d5e",
+                                "description": "Hello",
+                                "weight": 12,
+                                "width": 6,
+                                "height": 8,
+                                "depth": 7,
+                                "from_name": "Mickael",
+                                "from_address": "Avotrou",
+                                "to_name": "Jackson"
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/Package"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee0c9c8d454f077f6f6d5e",
+                                    "description": "Hello",
+                                    "weight": 12,
+                                    "width": 6,
+                                    "height": 8,
+                                    "depth": 7,
+                                    "from_name": "Mickael",
+                                    "from_address": "Avotrou",
+                                    "to_name": "Jackson"
+                                },
+                                "$ref": "#/components/schemas/Package"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If package not found in packages",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Packages"
+                ],
+                "summary": "Delete a package by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a package informations",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee0c9c8d454f077f6f6d5e",
+                                    "description": "Hello",
+                                    "weight": 12,
+                                    "width": 6,
+                                    "height": 8,
+                                    "depth": 7,
+                                    "from_name": "Mickael",
+                                    "from_address": "Avotrou",
+                                    "to_name": "Jackson"
+                                },
+                                "$ref": "#/components/schemas/Package"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If package not found in packages",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delivery": {
+            "get": {
+                "tags": [
+                    "Delivery"
+                ],
+                "summary": "Get all deliveries",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return all deliveries",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "$ref": "#/components/schemas/Delivery"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delivery/{id}": {
+            "get": {
+                "tags": [
+                    "Delivery"
+                ],
+                "summary": "Get one delivery by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a delivery informations",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee0c9c8d454f077f6f6d5e",
+                                    "package_id": "o2Jh7b480hhd",
+                                    "pickup_time": "date",
+                                    "start_time": "date",
+                                    "end_time": "date",
+                                    "status": "open - delivered"
+                                },
+                                "$ref": "#/components/schemas/Delivery"
+                            }
+                        },
+                        "404": {
+                            "description": "If delivery not found in packages",
+                            "content": {
+                                "application/json": {
+                                    "example": {
+                                        "message": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Delivery"
+                ],
+                "summary": "Update a delivery by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a delivery informations",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Corps de la requête",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "_id": "64ee0c9c8d454f077f6f6d5e",
+                                "package_id": "o2Jh7b480hhd",
+                                "pickup_time": "date",
+                                "start_time": "date",
+                                "end_time": "date",
+                                "status": "open - delivered"
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/Delivery"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee0c9c8d454f077f6f6d5e",
+                                    "package_id": "o2Jh7b480hhd",
+                                    "pickup_time": "date",
+                                    "start_time": "date",
+                                    "end_time": "date",
+                                    "status": "open - delivered"
+                                },
+                                "$ref": "#/components/schemas/Delivery"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If package not found in packages",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Delivery"
+                ],
+                "summary": "Delete a delivery by giving his id",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "description": "Return a delivery informations",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee0c9c8d454f077f6f6d5e",
+                                    "package_id": "o2Jh7b480hhd",
+                                    "pickup_time": "date",
+                                    "start_time": "date",
+                                    "end_time": "date",
+                                    "status": "open - delivered"
+                                },
+                                "$ref": "#/components/schemas/Delivery"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If package not found in deliveries",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "type": "String",
+                            "description": "Identifiant auto-généré par mongoose"
+                        },
+                        "name": {
+                            "type": "String",
+                            "description": "(UNIQUE) : Nom de l'utilisateur"
+                        },
+                        "email": {
+                            "type": "String",
+                            "format": "email",
+                            "pattern": "^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,10}$",
+                            "description": "(UNIQUE) : Adresse e-mail de l'utilisateur"
+                        },
+                        "password": {
+                            "type": "String",
+                            "minLength": 8,
+                            "description": "Mot de passe généré par le système pour l'utilisateur"
+                        },
+                        "phone": {
+                            "type": "Number",
+                            "maxlength": 8,
+                            "description": "(UNIQUE) : Numéro de téléphone de l'utilisateur"
+                        },
+                        "role": {
+                            "type": "String",
+                            "enum": [
+                                "user",
+                                "livreur",
+                                "admin"
+                            ],
+                            "description": "Type d'utilisateur"
+                        },
+                        "email_verified": {
+                            "type": "Boolean",
+                            "default": "false",
+                            "description": "Statut de l'utilisateur: email vérifié ou non vérifié ?"
+                        },
+                        "confirmation_token": {
+                            "type": "String",
+                            "default": "null",
+                            "description": "Token de vérification du mail de l'utilisateur"
+                        },
+                        "created_at": {
+                            "type": "String",
+                            "description": "Timestamp de la ressource",
+                            "example": "timestamp"
+                        }
+                    }
+                },
+                "required": [
+                    "name",
+                    "email",
+                    "phone",
+                    "password"
+                ]
+            },
+            "Package": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "type": "String",
+                            "description": "Identifiant auto-généré par mongoose"
+                        },
+                        "active_delivery_id": {
+                            "type": "String",
+                            "$ref": "#/components/schemas/Delivery",
+                            "description": "Identifiant auto-généré par mongoose en référence à la livraison concernant ce colis"
+                        },
+                        "description": {
+                            "type": "String",
+                            "description": "Description du package"
+                        },
+                        "weight": {
+                            "type": "Number",
+                            "description": "POids du package",
+                            "example": 10
+                        },
+                        "width": {
+                            "type": "Number",
+                            "description": "Largeur du package",
+                            "example": 2
+                        },
+                        "height": {
+                            "type": "Number",
+                            "description": "Hauteur"
+                        }
+                    },
+                    "depth": {
+                        "type": "Number",
+                        "description": "Profondeur"
+                    },
+                    "from_name": {
+                        "type": "String",
+                        "description": "Destinateur"
+                    },
+                    "from_address": {
+                        "type": "String",
+                        "description": "Destinateur address"
+                    },
+                    "from_location": {
+                        "type": "object",
+                        "description": "Longitude et latitude",
+                        "example": {
+                            "lat": 2,
+                            "lng": -1
+                        }
+                    },
+                    "to_name": {
+                        "type": "String",
+                        "description": "Destinataire"
+                    },
+                    "to_address": {
+                        "type": "String",
+                        "description": "Destinataire address"
+                    },
+                    "to_location": {
+                        "type": "object",
+                        "description": "Longitude et latitude",
+                        "example": {
+                            "lat": 2,
+                            "lng": -1
+                        }
+                    },
+                    "timestamps": {
+                        "type": "String",
+                        "description": "Timestamp de la ressource"
+                    }
+                },
+                "required": [
+                    "description",
+                    "weight",
+                    "width",
+                    "height",
+                    "depth",
+                    "from_name",
+                    "from_address",
+                    "from_location",
+                    "from_address",
+                    "to_name",
+                    "to_address",
+                    "to_location"
+                ]
+            },
+            "Delivery": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "type": "String",
+                            "description": "Identifiant auto-généré par mongoose"
+                        },
+                        "package_id": {
+                            "type": "String",
+                            "$ref": "#/components/schemas/Package",
+                            "description": "Identifiant auto-généré par mongoose en référence au package concernant cette livraison"
+                        },
+                        "pickup_time": {
+                            "type": "String",
+                            "description": "Timestamp de la recupération"
+                        },
+                        "start_time": {
+                            "type": "Number",
+                            "description": "Timestamp du début de la livraison"
+                        },
+                        "end_time": {
+                            "type": "Number",
+                            "description": "Timestamp de fin de la livraison"
+                        },
+                        "location": {
+                            "type": "object",
+                            "description": "Longitude et latitude",
+                            "example": {
+                                "lat": 2,
+                                "lng": -1
+                            }
+                        },
+                        "status": {
+                            "type": "String",
+                            "enum": [
+                                "open",
+                                "picked-up",
+                                "in-transit",
+                                "delivered",
+                                "failed"
+                            ],
+                            "description": "Etat de la livraison"
+                        }
+                    },
+                    "timestamps": {
+                        "type": "String",
+                        "description": "Timestamp de la ressource"
+                    }
+                },
+                "required": []
+            }
+        }
+    },
+    "securitySchemes": {
+        "JWTBearer": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT",
+            "description": "Token de connexion obtenu après la connexion"
+        }
+    }
+}
