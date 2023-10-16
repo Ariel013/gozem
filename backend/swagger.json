@@ -25,7 +25,7 @@
             "description": "Routes des users"
         },
         {
-            "name": "Package",
+            "name": "Packages",
             "description": "Routes de manipulation des Packages"
         },
         {
@@ -424,7 +424,7 @@
         "/package": {
             "get": {
                 "tags": [
-                    "Operation"
+                    "Packages"
                 ],
                 "summary": "Get all packages",
                 "security": [
@@ -450,12 +450,92 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Packages"
+                ],
+                "summary": "Add a package",
+                "description": "New package registration",
+                "parameters": [],
+                "requestBody": {
+                    "description": "Corps de la requete",
+                    "require": true,
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "description": "Hello",
+                                "weight": 12,
+                                "width": 6,
+                                "height": 8,
+                                "depth": 7,
+                                "from_name": "Mickael",
+                                "from_address": "Avotrou",
+                                "from_location": {
+                                    "lat": 2,
+                                    "lng": -1
+                                },
+                                "to_name": "Jackson",
+                                "to_address": "Avotrou",
+                                "to_location": {
+                                    "lat": 2,
+                                    "lng": -1
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/Package"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee2052007b924585edbce6",
+                                    "description": "Hello",
+                                    "weight": 12,
+                                    "width": 6,
+                                    "height": 8,
+                                    "depth": 7,
+                                    "from_name": "Mickael",
+                                    "from_address": "Avotrou",
+                                    "from_location": {
+                                        "lat": 2,
+                                        "lng": -1
+                                    },
+                                    "to_name": "Jackson",
+                                    "to_address": "Avotrou",
+                                    "to_location": {
+                                        "lat": 2,
+                                        "lng": -1
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Package"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "If a field is missing",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "All fields are required."
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/package/{id}": {
             "get": {
                 "tags": [
-                    "Operation"
+                    "Packages"
                 ],
                 "summary": "Get one package by giving his id",
                 "security": [
@@ -659,6 +739,54 @@
                                             "$ref": "#/components/schemas/Delivery"
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Delivery"
+                ],
+                "summary": "Add a delivery",
+                "description": "New delivery registration",
+                "parameters": [],
+                "requestBody": {
+                    "description": "Corps de la requete",
+                    "require": true,
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "package_id": "23hjhjvh07gjhgjhy65jhnjh"
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/Delivery"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "_id": "64ee2052007b924585edbce6",
+                                    "package_id": "23hjhjvh07gjhgjhy65jhnjh"
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Delivery"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "If a field is missing",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "All fields are required."
                                 }
                             }
                         }
