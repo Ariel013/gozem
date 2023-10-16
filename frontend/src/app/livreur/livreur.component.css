@@ -43,6 +43,9 @@
     justify-content: center;
     align-items: center;
     font-size: 26px;
+    background-image: url('../../assets/unnamed.png');
+    background-size: contain;
+    background-attachment: fixed;
 
     /* border-radius: 2rem; */
 }

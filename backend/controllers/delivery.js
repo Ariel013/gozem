@@ -78,7 +78,6 @@ exports.deletedelivery = async (req, res) => {
 
     // Recherche de la livraison correspondante
     const delivery = await Delivery.findById(deliveryId)
-    // console.log(delivery)
     if (!delivery) {
       return res.status(404).json({ error: 'Livraison non trouvé' })
     }

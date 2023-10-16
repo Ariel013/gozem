@@ -1,9 +1,9 @@
 // Import des modules nécessaires
 const express = require('express')
 const http = require('http')
+
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger.json')
-// const socketIo = require('socket.io')
 
 const cors = require('cors')
 const connectDB = require('./config/db')
@@ -25,7 +25,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // Configuration des connexions WebSocket
 
-// const io = socketIo(server)
 const io = require('socket.io')(server, {
   cors: {
     origin: 'http://localhost:4200',
@@ -40,14 +39,10 @@ io.on('connection', (socket) => {
 
   // Écoute des événements de changement de statut et de localisation
   socket.on('update_status', (data) => {
-    // Mettez à jour le statut en base de données avec data.delivery_id et data.newStatus
-    // Diffusez ensuite le changement de statut à tous les clients connectés
     io.emit('status_changed', data)
   })
 
   socket.on('update_location', (locationUpdate) => {
-    // Mettez à jour la localisation en base de données avec data.delivery_id et data.location
-    // Diffusez ensuite la mise à jour de la localisation à tous les clients connectés
     io.emit('location_changed', locationUpdate)
   })
 })

@@ -1,14 +1,10 @@
 const User = require('../../models/user')
 
 exports.confirmationEmail = async (req, res) => {
-  // console.log('AZERTYUIO')
   const { token } = req.params
-  // console.log(token)
 
   try {
     const user = await User.findOne({ confirmation_token: token })
-    // console.log(user)
-    // console.log(admin)
 
     if (user) {
       user.email_verified = true

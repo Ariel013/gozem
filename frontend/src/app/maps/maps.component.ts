@@ -25,16 +25,12 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // Récupération l'ID de la livraison depuis les paramètres de l'URL
     this.route.params.subscribe(async (params) => {
       this.entityId = params['id'];
-      // console.log(this.entityId)
-      // console.log("packageResponse")
-
 
       let packageResponse: any;
 
       try {
         // Tentative de recherche sur le modèle package
         packageResponse = await this._packagesService.getPackageById(this.entityId).toPromise();
-        console.log(packageResponse)
       } catch (error) {
         // Si une erreur se produit, nous supposons que c'est un ID de delivery et essayons le modèle de delivery
       }
@@ -45,7 +41,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
         this.packageDetails = packageResponse;
         if (this.packageDetails.active_delivery_id) {
           // Si un delivery actif est associé au package
-          // console.log(this.packageDetails.active_delivery_id)
 
           const deliveryResponse: any = await this._deliveryService.getDeliveryById(this.packageDetails.active_delivery_id).toPromise();
           if (deliveryResponse && deliveryResponse.location) {
@@ -56,7 +51,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
             console.error('Coordonnées de localisation manquantes dans les détails de la livraison.');
           }
         } else if (this.packageDetails.from_location) {
-          console.log("ghnoiygvhbjngfghjkjhgf hj")
           // SI on ne trouve pas de delivery actif on prend la localisation su package
           const lat = this.packageDetails.from_location.lat;
           const lng = this.packageDetails.from_location.lng
@@ -66,11 +60,8 @@ export class MapsComponent implements OnInit, AfterViewInit {
         }
 
       } else {
-        // console.log("packageResponse")
-        console.log("packageResponseeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
         // Faire la recherche dans le model delivery
         const deliveryResponse: any = await this._deliveryService.getDeliveryById(this.entityId).toPromise();
-        console.log(deliveryResponse)
         if (deliveryResponse && deliveryResponse.location) {
           const lat = deliveryResponse.location.lat;
           const lng = deliveryResponse.location.lng;
@@ -92,7 +83,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
     loader.load().then(() => {
       console.log('Carte chargée');
-      // this.initializeMap();
     });
   }
 

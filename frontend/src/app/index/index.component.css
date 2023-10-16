@@ -37,12 +37,16 @@
 
 
 .children2 {
-    width: 60%;
+    width: 100%;
     border: 1px solid rgb(83, 204, 83);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 26px;
+    background-image: url('../../assets/unnamed.png');
+    background-size: contain;
+    background-attachment: fixed;
+
 
     /* border-radius: 2rem; */
 }

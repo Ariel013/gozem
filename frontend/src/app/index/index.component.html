@@ -4,10 +4,10 @@
         <form class="formulaire" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>ID</mat-label>
-                <input class="full-width beauty" type="string" placeholder="Enter ID" formControlName="id">
+                <input class="full-width beauty" type="string" placeholder="Enter Package ID" formControlName="id">
             </mat-form-field>
             <div class="container">
-                <button mat-raised-button style="background: green; text-decoration: none; color: white; padding: 5px; width: 20%">Submit</button>
+                <button mat-raised-button style="background: green; text-decoration: none; color: white; padding: 5px; width: 20%">Track</button>
             </div>
         </form>
 
@@ -64,7 +64,7 @@
             </div>
             <!-- 2 -->
             <div class="children2">
-                Vous vous trouvez ici : <a [routerLink]="['/maps', packageDetails._id]">Voir la carte</a>
+                Votre colis se trouve ici : <a style="font-weight: bold;" [routerLink]="['/maps', packageDetails._id]">Voir la carte</a>
             </div>
         </div>
     </div>

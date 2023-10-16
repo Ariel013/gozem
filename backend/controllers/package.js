@@ -1,7 +1,4 @@
 const Package = require('../models/package')
-// const Delivery = require('../models/delivery')
-
-// let newPack = ''
 
 // Create a new package
 exports.addPackage = async (req, res) => {
@@ -109,7 +106,6 @@ exports.deletepackage = async (req, res) => {
 
     // Recherche du package correspondant
     const pack = await Package.findById(packageId)
-    // console.log(pack)
     if (!pack) {
       return res.status(404).json({ error: 'Package non trouvé' })
     }

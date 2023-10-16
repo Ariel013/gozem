@@ -48,7 +48,6 @@ export class GetPackageComponent implements OnInit {
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator
-        // console.log(res)
       },
       error: console.log
     })

@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
       this._loginService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
           this.response = response;
-          // console.log(response)
 
           // Stockage du token dans le Local Storage
           localStorage.setItem('token', response.token);
@@ -46,7 +45,6 @@ export class LoginComponent implements OnInit {
           // Recupération du role de l'utilisateur
           this._loginService.getUserRole().subscribe({
             next: (role: any) => {
-              // console.log('Role est:', role)
               // Redirection de l'utilisateur
               if (role.role === 'admin') {
                 this.router.navigate(['/users']);
@@ -66,9 +64,6 @@ export class LoginComponent implements OnInit {
           })
 
           this._coreService.openSnackBar('User logged successfully!', 'done')
-
-          // Après une connexion réussie, redirection de l'utilisateur vers la page d'accueil.
-          // this.router.navigate(['/index']);
         },
         error: (err: any) => {
           console.error(err);

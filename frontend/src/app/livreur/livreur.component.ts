@@ -32,16 +32,13 @@ export class LivreurComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Écoute des mises à jour de localisation du serveur
     this.socket.on('location_changed', (data: any) => {
-      // Mettez à jour l'affichage avec la nouvelle localisation reçue du serveur
-      // data contient les données de localisation envoyées par le serveur
     })
-
     // Démarrer la mise à jour de la localisation si le statut est adéquat
     this.startLocationUpdateInterval();
   }
 
   ngOnDestroy() {
-    // Assurez-vous de fermer la connexion websocket lorsque le composant est détruit
+    // Fermer la connexion websocket lorsque le composant est détruit
     this.socket.disconnect();
   }
 
@@ -53,7 +50,6 @@ export class LivreurComponent implements OnInit, OnDestroy {
 
   // Appel de la fonction toutes les 20 secondes
   locationUpdateInterval: any;
-
   startLocationUpdateInterval() {
     this.locationUpdateInterval = setInterval(() => this.updateLocationPeriodically(), 20000);
   }
@@ -76,10 +72,8 @@ export class LivreurComponent implements OnInit, OnDestroy {
           const packageData: any = await this._packagesService.getPackageById(this.deliveryDetails.package_id._id).toPromise();
           console.log('yooooooooooo')
 
-
-          // Assurez-vous que les données du package sont disponibles
           if (packageData) {
-            // Ajoutez les informations du package aux détails de la livraison
+            // Ajouter les informations du package aux détails de la livraison
             this.deliveryDetails.package = packageData;
           } else {
             console.error('Les informations du package sont indisponibles.');
@@ -103,9 +97,6 @@ export class LivreurComponent implements OnInit, OnDestroy {
         try {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
-
-          // console.log("Latitude : " + lat);
-          // console.log("Longitude : " + lng);
 
           if (this.deliveryDetails && this.deliveryDetails.status) {
             // Vérification de la validité du statut

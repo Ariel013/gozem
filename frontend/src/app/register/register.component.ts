@@ -16,8 +16,6 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _registerService: RegisterService,
-    // private _dialogRef: MatDialogRef<RegisterComponent>,
-    // @Inject(MAT_DIALOG_DATA) public data: any,
     private _coreService: CoreService
   ) {
     this.registerForm = this._fb.group({
@@ -29,7 +27,6 @@ export class RegisterComponent implements OnInit {
     })
   }
   ngOnInit(): void {
-    // this.registerForm.patchValue(this.data)
   }
 
   onRegisterSubmit() {
@@ -38,7 +35,6 @@ export class RegisterComponent implements OnInit {
       this._registerService.register(this.registerForm.value).subscribe({
         next: (val: any) => {
           this._coreService.openSnackBar('Compte crée avec succès!, Veuillez s\'il-vous-plait consulter vos mails pour valider le compte', 'done')
-          // this._dialogRef.close(true);
         },
         error: (err: any) => {
           console.error(err);
