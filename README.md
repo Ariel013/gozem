@@ -65,6 +65,10 @@ Pour le backend, exécutez la commande suivante :
 
 Le backend sera accessible à l'adresse http://localhost:5000/.
 
+3. Vous avez également la possibilité d'aacéder à la documentation de l'api ici :
+
+`http://localhost:5000/api-docs`
+
 # Utilisation
 
 

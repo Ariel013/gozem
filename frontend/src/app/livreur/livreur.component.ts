@@ -63,15 +63,19 @@ export class LivreurComponent implements OnInit, OnDestroy {
 
     if (idControl) {
       const deliveryId = idControl.value;
+    console.log(deliveryId)
+
 
       try {
         // Appel du service pour effectuer la recherche du delivery avec son ID
         const response: any = await this._deliveryService.getDeliveryById(deliveryId).toPromise();
         this.deliveryDetails = response;
-
+        console.log(this.deliveryDetails)
         if (this.deliveryDetails && this.deliveryDetails.package_id) {
           // Appel du service pour obtenir les informations du package
-          const packageData: any = await this._packagesService.getPackageById(this.deliveryDetails.package_id).toPromise();
+          const packageData: any = await this._packagesService.getPackageById(this.deliveryDetails.package_id._id).toPromise();
+          console.log('yooooooooooo')
+
 
           // Assurez-vous que les données du package sont disponibles
           if (packageData) {

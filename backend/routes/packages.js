@@ -1,11 +1,9 @@
 const express = require('express')
 const { getPackages, addPackage, updatePackage, getonePackage, deletepackage } = require('../controllers/package')
-const { verifyRole } = require('../middlewares/auth')
+const { verifyAdmin, auth } = require('../middlewares/auth')
 const router = express.Router()
 
-router.route('/package').get(verifyRole(['admin']), getPackages)
-router.route('/package/:id').get(verifyRole(['admin', 'user']), getonePackage)
-router.route('/package').post(verifyRole(['admin']), addPackage)
-router.route('/package/:id').put(verifyRole(['admin']), updatePackage)
-router.route('/package/:id').delete(verifyRole(['admin']), deletepackage)
+router.route('/package').get(auth, verifyAdmin, getPackages)
+router.route('/package/:id').get(auth, getonePackage).put(auth, updatePackage).delete(auth, verifyAdmin, deletepackage)
+router.route('/package').post(auth, verifyAdmin, addPackage)
 module.exports = router

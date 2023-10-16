@@ -109,7 +109,7 @@ exports.getoneDelivery = async (req, res) => {
     const deliveryId = req.params.id
 
     // Recherche du delivery correspondant
-    const delivery = await Delivery.findById(deliveryId)
+    const delivery = await Delivery.findById(deliveryId).populate('package_id')
     if (!delivery) {
       return res.status(404).json({ error: 'Livraison non trouvé' })
     }

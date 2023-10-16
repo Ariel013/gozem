@@ -25,15 +25,21 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // Récupération l'ID de la livraison depuis les paramètres de l'URL
     this.route.params.subscribe(async (params) => {
       this.entityId = params['id'];
+      // console.log(this.entityId)
+      // console.log("packageResponse")
+
 
       let packageResponse: any;
 
       try {
         // Tentative de recherche sur le modèle package
         packageResponse = await this._packagesService.getPackageById(this.entityId).toPromise();
+        console.log(packageResponse)
       } catch (error) {
         // Si une erreur se produit, nous supposons que c'est un ID de delivery et essayons le modèle de delivery
       }
+
+
 
       if (packageResponse) {
         this.packageDetails = packageResponse;
@@ -50,6 +56,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
             console.error('Coordonnées de localisation manquantes dans les détails de la livraison.');
           }
         } else if (this.packageDetails.from_location) {
+          console.log("ghnoiygvhbjngfghjkjhgf hj")
           // SI on ne trouve pas de delivery actif on prend la localisation su package
           const lat = this.packageDetails.from_location.lat;
           const lng = this.packageDetails.from_location.lng
@@ -59,14 +66,19 @@ export class MapsComponent implements OnInit, AfterViewInit {
         }
 
       } else {
+        // console.log("packageResponse")
+        console.log("packageResponseeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
         // Faire la recherche dans le model delivery
         const deliveryResponse: any = await this._deliveryService.getDeliveryById(this.entityId).toPromise();
+        console.log(deliveryResponse)
         if (deliveryResponse && deliveryResponse.location) {
           const lat = deliveryResponse.location.lat;
           const lng = deliveryResponse.location.lng;
           this.initializeMap(lat, lng);
         } else {
-          console.error('Coordonnées de localisation manquantes dans les détails de la livraison.');
+          const lat = deliveryResponse.package_id.from_location.lat;
+          const lng = deliveryResponse.package_id.from_location.lng;
+          this.initializeMap(lat, lng);
         };
       }
 
@@ -74,38 +86,38 @@ export class MapsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-      const loader = new Loader({
-        apiKey: 'AIzaSyABllXWc735BWqURbAcpxsPqaBl4HGPYGg'
-      });
+    const loader = new Loader({
+      apiKey: 'AIzaSyABllXWc735BWqURbAcpxsPqaBl4HGPYGg'
+    });
 
-      loader.load().then(() => {
-        console.log('Carte chargée');
-        // this.initializeMap();
-      });
-    }
+    loader.load().then(() => {
+      console.log('Carte chargée');
+      // this.initializeMap();
+    });
+  }
 
   initializeMap(lat: number, lng: number) {
-      const mapOptions: google.maps.MapOptions = {
-        center: { lat, lng },
-        zoom: 12,
+    const mapOptions: google.maps.MapOptions = {
+      center: { lat, lng },
+      zoom: 12,
+    };
+
+    const mapElement = document.getElementById('map');
+    if (mapElement) {
+      this.map = new google.maps.Map(mapElement, mapOptions)
+
+      // Marker
+      const markerOptions: google.maps.MarkerOptions = {
+        position: { lat, lng },
+        map: this.map,
+        title: 'Position de votre colis'
       };
 
-      const mapElement = document.getElementById('map');
-      if(mapElement) {
-        this.map = new google.maps.Map(mapElement, mapOptions)
+      this.marker = new google.maps.Marker(markerOptions);
 
-        // Marker
-        const markerOptions: google.maps.MarkerOptions = {
-          position: { lat, lng },
-          map: this.map,
-          title: 'Position de votre colis'
-        };
+    } else {
+      console.error('Élément "map" introuvable.');
 
-        this.marker = new google.maps.Marker(markerOptions);
-
-      } else {
-        console.error('Élément "map" introuvable.');
-
-      }
     }
+  }
 }

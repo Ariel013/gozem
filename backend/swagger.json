@@ -1172,14 +1172,20 @@
                 },
                 "required": []
             }
+        },
+        "securitySchemes": {
+            "Group Header": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-Group-Authorization"
+            },
+            "JWTBearer": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "Token de connexion obtenu après la connexion"
+            }
         }
-    },
-    "securitySchemes": {
-        "JWTBearer": {
-            "type": "http",
-            "scheme": "bearer",
-            "bearerFormat": "JWT",
-            "description": "Token de connexion obtenu après la connexion"
-        }
+
     }
 }

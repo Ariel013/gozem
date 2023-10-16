@@ -7,26 +7,26 @@
                 <input class="full-width beauty" type="string" placeholder="Enter ID" formControlName="id">
             </mat-form-field>
             <div class="container">
-                <button mat-raised-button color="primary">Submit</button>
+                <button mat-raised-button style="background: green; text-decoration: none; color: white; padding: 5px; width: 20%">Submit</button>
             </div>
         </form>
 
 
         <div class="parent">
             <!-- 1 -->
-            <div class="children1">
+            <div class="children1" style="display: flex;flex-direction: column;justify-content: center;">
                 <div class="package">
                     <mat-label>
                         <h1><strong>Package Details</strong></h1>
                     </mat-label>
-                    <div>
-                        <div>
+                    <div style="font-size: 18px;">
+                        <div style="padding-bottom: 15px">
                             <mat-label>Description: {{ deliveryDetails?.package?.description }}</mat-label>
                         </div>
-                        <div>
+                        <div style="padding-bottom: 15px">
                             <mat-label>Weight: {{ deliveryDetails?.package?.weight }}</mat-label>
                         </div>
-                        <div>
+                        <div >
                             <mat-label>Width: {{ deliveryDetails?.package?.width }}</mat-label>
                         </div>
                     </div>
@@ -36,8 +36,11 @@
                     <mat-label>
                         <h1><strong>Delivery Details</strong></h1>
                     </mat-label>
-                    <div>
-                        <div>
+                    <div style="font-size: 18px;">
+                        <div style="padding-bottom: 15px">
+                            <mat-label>Status: {{ deliveryDetails && deliveryDetails ? (deliveryDetails.status) : 'N/A' }}</mat-label>
+                        </div>
+                        <div style="padding-bottom: 15px">
                             <mat-label>Start Time: {{ deliveryDetails && deliveryDetails ? (deliveryDetails.end_time |
                                 date: 'dd-MM-yyyy HH:mm') : 'N/A' }}</mat-label>
                         </div>
@@ -57,19 +60,19 @@
             <!-- 3 -->
             <div class="children3">
                 <div class="children4">
-                    <button class="but" mat-raised-button color="primary"
+                    <button class="but" mat-raised-button style="background: rgb(0, 128, 122); text-decoration: none; color: white; padding: 5px;"
                         (click)="updateStatus('picked-up')">Picked-Up</button>
                 </div>
                 <div class="children4">
-                    <button class="but" mat-raised-button color="primary"
+                    <button class="but" mat-raised-button style="background: rgb(172, 122, 15); text-decoration: none; color: white; padding: 5px;"
                         (click)="updateStatus('in-transit')">In-Transit</button>
                 </div>
                 <div class="children4">
-                    <button class="but" mat-raised-button color="primary"
+                    <button class="but" mat-raised-button style="background: green; text-decoration: none; color: white; padding: 5px;"
                         (click)="updateStatus('delivered')">Delivered</button>
                 </div>
                 <div class="children4">
-                    <button class="but" mat-raised-button color="primary"
+                    <button class="but" mat-raised-button style="background: rgb(179, 60, 51); text-decoration: none; color: white; padding: 5px;"
                         (click)="updateStatus('failed')">Failed</button>
                 </div>
             </div>

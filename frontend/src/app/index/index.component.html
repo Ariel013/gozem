@@ -7,38 +7,38 @@
                 <input class="full-width beauty" type="string" placeholder="Enter ID" formControlName="id">
             </mat-form-field>
             <div class="container">
-                <button mat-raised-button color="primary">Submit</button>
+                <button mat-raised-button style="background: green; text-decoration: none; color: white; padding: 5px; width: 20%">Submit</button>
             </div>
         </form>
 
 
         <div class="parent">
             <!-- 1 -->
-            <div class="children1">
+            <div class="children1" style="display: flex;flex-direction: column;justify-content: center;">
                 <div class="package">
                     <mat-label>
                         <h1><strong>Package Details</strong></h1>
                     </mat-label>
-                    <div>
-                        <div>
+                    <div style="font-size: 18px;">
+                        <div style="padding-bottom: 15px">
                             <mat-label>Description: {{ packageDetails?.description }}</mat-label>
                         </div>
-                        <div>
+                        <div style="padding-bottom: 15px">
                             <mat-label>Weight: {{ packageDetails?.weight }}</mat-label>
                         </div>
-                        <div>
+                        <div style="padding-bottom: 15px">
                             <mat-label>Width: {{ packageDetails?.width }}</mat-label>
                         </div>
-                        <div>
+                        <div style="padding-bottom: 15px">
                             <mat-label>From_Name: {{ packageDetails?.from_name }}</mat-label>
                         </div>
-                        <div>
+                        <div style="padding-bottom: 15px">
                             <mat-label>From_Address: {{ packageDetails?.from_address }}</mat-label>
                         </div>
-                        <div>
+                        <div style="padding-bottom: 15px">
                             <mat-label>To_Name: {{ packageDetails?.to_name }}</mat-label>
                         </div>
-                        <div>
+                        <div style="padding-bottom: 15px">
                             <mat-label>To_Address: {{ packageDetails?.to_address }}</mat-label>
                         </div>
                     </div>
@@ -48,12 +48,12 @@
                     <mat-label>
                         <h1><strong>Delivery Details</strong></h1>
                     </mat-label>
-                    <div>
-                        <div>
+                    <div style="font-size: 18px;">
+                        <div style="padding-bottom: 15px">
                             <mat-label>Start Time: {{ packageDetails && packageDetails ? (packageDetails.end_time |
                                 date: 'dd-MM-yyyy HH:mm') : 'N/A' }}</mat-label>
                         </div>
-                        <div>
+                        <div style="padding-bottom: 15px">
                             <mat-label>End Time: {{ packageDetails && packageDetails ? (packageDetails.start_time |
                                 date: 'dd-MM-yyyy HH:mm') : 'N/A' }}</mat-label>
                         </div>

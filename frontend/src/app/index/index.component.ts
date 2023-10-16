@@ -31,20 +31,23 @@ export class IndexComponent {
 
   async onSubmit() {
     const idControl = this.searchForm.get('id');
-  
+    // console.log( 'ID Controle', idControl)
+
     if (idControl) {
       const packageId = idControl.value;
-  
+
       try {
         // Appel du service pour effectuer la recherche du package avec son ID
         const response: any = await this._packagesService.getPackageById(packageId).toPromise();
         this.packageDetails = response;
-        // console.log(this.packageDetails)
-  
+        console.log(this.packageDetails)
+
         if (this.packageDetails && this.packageDetails.active_delivery_id) {
           // Appel du service pour obtenir les informations du delivery
           const deliveryData: any = await this._deliveryService.getDeliveryById(this.packageDetails.active_delivery_id).toPromise();
-          
+          // console.log("deliveryData")
+
+
           // Assurez-vous que les données du package sont disponibles
           if (deliveryData) {
             // Ajoutez les informations du package aux détails de la livraison

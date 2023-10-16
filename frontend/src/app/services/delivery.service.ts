@@ -62,7 +62,7 @@ export class DeliveryService {
 
   getDeliveryById(id: string): Observable<any> {
     const token = localStorage.getItem('token');
-
+console.log('id est' + id)
     if(!token) {
       return of(null);
     }
