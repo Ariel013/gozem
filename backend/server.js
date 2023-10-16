@@ -79,7 +79,7 @@ process.on('unhandledRejection', (err) => {
 })
 
 // Routes
-app.use('/api/auth', authRoute)
+app.use('/api/users', authRoute)
 app.use('/api/users', crudUsers)
 app.use('/api', crudPackages)
 app.use('/api', crudDeliveries)

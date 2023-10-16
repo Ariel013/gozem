@@ -105,9 +105,18 @@ exports.updateUser = async (req, res) => {
     }
 
     // Mise à jour des informations de l'utilisateur
-    userToUpdate.name = user.name
-    userToUpdate.email = user.email
-    userToUpdate.phone = user.phone
+    if (user.name) {
+      userToUpdate.name = user.name
+    }
+    if (user.email) {
+      userToUpdate.email = user.email
+    }
+    if (user.phone) {
+      userToUpdate.phone = user.phone
+    }
+    if (user.role) {
+      userToUpdate.role = user.role
+    }
 
     if (user.password) {
       const passwordMOd = user.password
