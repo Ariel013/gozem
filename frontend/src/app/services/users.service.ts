@@ -10,7 +10,7 @@ export class UsersService {
   constructor(private _http: HttpClient) { }
 
   addUser(data: any): Observable<any> {
-    return this._http.post('http://localhost:5000/api/auth/register', data);
+    return this._http.post('http://localhost:5000/api/users/register', data);
   }
 
   updateUser(id: string, data: any): Observable<any> {

@@ -1,89 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AddUserComponent } from './add-user/add-user.component';
-import { UsersService } from './services/users.service';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { CoreService } from './core/core.service';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+
+export class AppComponent implements OnInit{  
   title = 'frontend';
 
-  displayedColumns: string[] = ['name', 'email', 'phone', 'role', 'action'];
-  dataSource!: MatTableDataSource<any>;
+  isLoggedIn: boolean = false;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  constructor(private authService: AuthService) {}
 
-  constructor(
-    private _dialog: MatDialog,
-    private _usersService: UsersService,
-    private _coreService: CoreService
-  ) { }
-
-  ngOnInit(): void {
-    this.getUsers();
+  ngOnInit() {
+    this.isLoggedIn = this.authService.isAuthenticated();
   }
-  openAddUserForm() {
-    const dialogRef = this._dialog.open(AddUserComponent);
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-          this.getUsers();
-        }
-      }
-    })
+  logout() {
+    this.authService.logout();
   }
 
-  getUsers() {
-    this._usersService.getUsers().subscribe({
-      next: (res: any) => {
-        this.dataSource = new MatTableDataSource(res.users)
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator
-        console.log(res.users)
-      },
-      error: console.log
-    })
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  deleteUsers(id: string) {
-    this._usersService.deleteUsers(id).subscribe({
-      next: (res) => {
-        this._coreService.openSnackBar('User deleted sucessfully!', 'done')
-        this.getUsers();
-      },
-      error: console.log,
-    })
-  }
-
-  openEditUserForm(data: any) {
-    const dialogRef = this._dialog.open(AddUserComponent, {
-      data,
-    });
-
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-          this.getUsers();
-        }
-      }
-    })
-
-  }
 }

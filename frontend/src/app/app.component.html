@@ -4,5 +4,6 @@
   </button>
   <span>Gozem Business Case</span>
   <span class="example-spacer"></span>
+  <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

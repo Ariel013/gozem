@@ -1,7 +1,7 @@
 <div class="bootstrap-wrapper">
     <div class="container">
         <div class="row" style="margin-top: 90px;">
-            <div class="col-md-6 offset-md-3">
+            <div class="">
                 <div class="container text-center">
                     <img src="../../assets/gozem.png" alt="GOZEM SUPER APP">
                 </div>
@@ -23,8 +23,9 @@
                         <input class="full-width beauty" type="password" placeholder="Password" formControlName="password">
                     </mat-form-field>
 
-                    <div class="container text-center">
-                        <button mat-raised-buton color="primary" type="submit">Login</button>
+                    <div class="container text-center" style="display: flex;">
+                        <button mat-raised-buton color="primary" style="margin-right: 70%;">Login</button>
+                        <button  mat-raised-button color="primary"><a [routerLink]="['/register']">Get Account</a></button>
                     </div>
                 </form>
             </div>

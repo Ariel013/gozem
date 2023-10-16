@@ -1,0 +1,32 @@
+.error-page {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #f8f8f8;
+    font-family: Arial, sans-serif;
+  }
+  
+  .error-page h1 {
+    font-size: 36px;
+    color: #f44336; /* Red color for the error message */
+    margin: 10px 0;
+  }
+  
+  .error-page p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .error-page a {
+    text-decoration: none;
+    color: #2196F3; /* Blue color for the link */
+  }
+  
+  .error-page a:hover {
+    text-decoration: underline;
+  }
+  

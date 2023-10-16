@@ -10,7 +10,7 @@ export class LoginService {
   constructor(private _http: HttpClient) { }
 
   login(data: any): Observable<any> {
-    return this._http.post('http://localhost:5000/api/auth/login', data);
+    return this._http.post('http://localhost:5000/api/users/login', data);
   }
 
   // Recuperation du role de l'utilisateur
@@ -25,7 +25,7 @@ export class LoginService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this._http.get('http://localhost:5000/api/auth/role', { headers })
+    return this._http.get('http://localhost:5000/api/users/role', { headers })
   }
 
 }

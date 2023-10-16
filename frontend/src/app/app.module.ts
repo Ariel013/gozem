@@ -35,6 +35,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import {MatListModule} from '@angular/material/list';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MapsComponent } from './maps/maps.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 @NgModule({
@@ -53,10 +54,10 @@ import { MapsComponent } from './maps/maps.component';
     SideBarComponent,
     DashboardComponent,
     MapsComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
@@ -76,6 +77,7 @@ import { MapsComponent } from './maps/maps.component';
     MatSnackBarModule,
     MatCardModule,
     MatListModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
