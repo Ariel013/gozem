@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DeliveryService } from '../services/delivery.service';
 import { PackagesService } from '../services/packages.service';
+import { environment } from 'src/environments/environment.prod';
 import { io } from 'socket.io-client';
 
 @Component({
@@ -13,6 +14,8 @@ export class IndexComponent {
   searchForm: FormGroup;
   packageDetails: any;
   private socket: any;
+  private BACK_URL = environment.BACK_URL
+
 
   constructor(private fb: FormBuilder,
     private _deliveryService: DeliveryService,
@@ -20,7 +23,7 @@ export class IndexComponent {
     this.searchForm = this.fb.group({
       id: ['']
     });
-    this.socket = io('http://localhost:5000', {
+    this.socket = io(`${this.BACK_URL}`, {
       withCredentials: true,
       extraHeaders: {
         "my-custom-header": "abcd"

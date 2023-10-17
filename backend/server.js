@@ -31,7 +31,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 const io = require('socket.io')(server, {
   cors: {
-    origin: 'http://localhost:4200',
+    origin: `${process.env.FRONT_URL}`,
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     allowedHeaders: ['my-custom-header'],
     credentials: true
