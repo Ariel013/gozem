@@ -8,6 +8,10 @@ const swaggerDocument = require('./swagger.json')
 const cors = require('cors')
 const connectDB = require('./config/db')
 
+// Model User
+const User = require('./models/user')
+const bcrypt = require('bcrypt')
+
 // Import des routes
 const authRoute = require('./routes/auth')
 const crudUsers = require('./routes/user')
@@ -51,8 +55,35 @@ io.on('connection', (socket) => {
 require('dotenv').config()
 
 const corsOptions = {
-  origin: 'http://localhost:4200', // Autoriser uniquement ce domaine
+  origin: `${process.env.FRONT_URL}`, // Autoriser uniquement ce domaine
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE']
+}
+
+// Création d'un admin au lancement de l'application
+const createAdmin = async () => {
+  try {
+    // Vérifier si il existe déjà un administrateur
+    const admin = await User.findOne({ role: 'admin' })
+
+    if (!admin) {
+      const mdp = 'Azerty1234'
+      const saltRounds = 10
+      const pass = await bcrypt.hash(mdp, saltRounds)
+
+      const firstAdmin = new User({
+        name: 'Admin',
+        email: 'admin@gmail.com',
+        password: pass,
+        phone: 22912345,
+        role: 'admin',
+        email_verified: true
+      })
+      await firstAdmin.save()
+      console.log('Admin created succesfully')
+    }
+  } catch (error) {
+    console.error('Erreur l\'ors de la création de l\'admin:', error)
+  }
 }
 
 // Middleware pour gérer les CORS
@@ -90,4 +121,5 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Erreur interne du serveur' })
 })
 
+createAdmin()
 module.exports = app

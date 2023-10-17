@@ -13,7 +13,7 @@ exports.getUsers = async (req, res) => {
     const startIndex = (page - 1) * perPage
 
     // Requete vers la BD pour récupérer les utilisateurs avec role user et livreur
-    const users = await User.find({ $or: [{ role: 'user' }, { role: 'livreur' }] })
+    const users = await User.find()
       .skip(startIndex)
       .limit(perPage)
       .exec()

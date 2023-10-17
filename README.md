@@ -19,8 +19,6 @@ Bienvenue dans le projet Angular de l'application de gestion de livraisons. Cett
 
 ## Installation
 
-### Frontend
-
 1. Clonez ce dépôt Git sur votre machine locale :
 
 ```bash
@@ -37,6 +35,8 @@ git clone https://github.com/Ariel013/gozem.git
    npm install
 
 4. Créez un fichier .env à la racine du projet et configurez les variables d'environnement requises.
+   
+5. Lancez le service mongo avec: systemctl start mongodb
 
 # Configuration des Variables d'Environnement
 
@@ -48,7 +48,7 @@ Pour faire fonctionner correctement l'application, vous devez configurer les var
   
 - BACK_URL : L'URL de l'interface utilisateur front-end.
 
-- MONGODB_URI : L'URL de votre base de données (par exemple, mongodb://localhost/nom-de-la-base).
+- MONGODB_URI : L'URL de votre base de données locale (par exemple, mongodb://localhost/nom-de-la-base).
 
 - jwtKey : La clé secrète pour la génération de jetons JWT.
 
