@@ -36,6 +36,10 @@ import {MatListModule} from '@angular/material/list';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import {FormsModule} from '@angular/forms';
+import { NgFor } from '@angular/common';
+import { Livreur1Component } from './livreur1/livreur1.component';
+
 
 
 @NgModule({
@@ -55,6 +59,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     DashboardComponent,
     MapsComponent,
     NotfoundComponent,
+    Livreur1Component,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +83,9 @@ import { NotfoundComponent } from './notfound/notfound.component';
     MatCardModule,
     MatListModule,
     AppRoutingModule,
+    FormsModule,
+    NgFor,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

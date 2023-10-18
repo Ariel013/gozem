@@ -1,6 +1,6 @@
 <div class="bootstrap-wrapper">
     <div class="container">
-        <div class="row" style="margin-top: 60px;">
+        <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="container text-center">
                     <img src="../../assets/gozem.png" alt="GOZEM SUPER APP">
@@ -8,7 +8,18 @@
                 </div>
                 <h1 class="text-center">Register Here !!!</h1>
 
-                <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" class="formulaire" >
+                <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" class="formulaire">
+
+                    <!-- Role -->
+                    <h4 style="display: flex; justify-content: center;">Select your Profile</h4>
+                    <div style="display: flex; justify-content: center;">
+                        <select [(ngModel)]="registerForm.value.role" formControlName="role" style="width: 100px;">
+                            <option *ngFor="let role of roles" [ngValue]="role.val">
+                                {{ role.name }}
+                            </option>
+                        </select>
+                    </div>
+
                     <!-- Username field -->
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Username</mat-label>
@@ -25,27 +36,41 @@
                     <!-- Phone field -->
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Phone Number</mat-label>
-                        <input class="full-width beauty" type="number" placeholder="Phone Number" formControlName="phone">
+                        <input class="full-width beauty" type="number" placeholder="Phone Number"
+                            formControlName="phone">
                     </mat-form-field>
 
 
-                    <mat-radio-group class="radio" aria-label="Select an option" formControlName="role">
+                    <!-- <mat-radio-group class="radio" aria-label="Select an option" formControlName="role">
                         <mat-label><b>Role</b></mat-label>
                         <mat-radio-button value="user">User</mat-radio-button>
                         <mat-radio-button value="livreur">Livreur</mat-radio-button>
-                    </mat-radio-group>
+                    </mat-radio-group> -->
+
+                    <!-- <h4>Select your Profile</h4>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Role</mat-label>
+                        <mat-select formControlName="role">
+                            <mat-option *ngFor="let role of roles" [value]="role.value">
+                                {{ role.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
 
 
                     <!-- Password field -->
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Password</mat-label>
-                        <input class="full-width beauty" type="password" placeholder="Password" formControlName="password">
+                        <input class="full-width beauty" type="password" placeholder="Password"
+                            formControlName="password">
                     </mat-form-field>
 
                     <div class="container text-center" style="display: flex; justify-content: space-between;">
-                        <button  mat-raised-button style="background-color: rgb(23, 145, 56); color: white">Register</button>
-                        <a mat-raised-buton color="primary" [routerLink]="['/login']" style="background: rgb(23, 145, 56); text-decoration: none; color: white; padding: 5px 15px;">Login</a>
-                        
+                        <button mat-raised-button
+                            style="background-color: rgb(23, 145, 56); color: white">Register</button>
+                        <a mat-raised-buton color="primary" [routerLink]="['/login']"
+                            style="background: rgb(23, 145, 56); text-decoration: none; color: white; padding: 5px 15px;">Login</a>
+
                     </div>
 
                 </form>

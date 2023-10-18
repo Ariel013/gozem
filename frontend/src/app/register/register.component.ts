@@ -1,8 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CoreService } from '../core/core.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgFor } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-register',
@@ -11,8 +15,10 @@ import { CoreService } from '../core/core.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-
-  Roles: any = ['User', 'Livreur'];
+  roles = [
+    { name: 'User', val: 'user' },
+    { name: 'Deliver', val: 'livreur' }
+  ];
   constructor(
     private _fb: FormBuilder,
     private _registerService: RegisterService,
@@ -35,6 +41,8 @@ export class RegisterComponent implements OnInit {
       this._registerService.register(this.registerForm.value).subscribe({
         next: (val: any) => {
           this._coreService.openSnackBar('Compte crée avec succès!, Veuillez s\'il-vous-plait consulter vos mails pour valider le compte', 'done')
+          console.log(this.registerForm.value)
+
         },
         error: (err: any) => {
           console.error(err);

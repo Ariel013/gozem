@@ -21,6 +21,9 @@ import { LoginComponent } from './login/login.component';
 // Index
 import { IndexComponent } from './index/index.component';
 
+//Livreur1
+import { Livreur1Component } from './livreur1/livreur1.component';
+
 //Livreur
 import { LivreurComponent } from './livreur/livreur.component';
 
@@ -84,6 +87,12 @@ const routes: Routes = [
   // index
   {
     path: "index", component: IndexComponent,
+    canActivate: [AuthGuard]
+  },
+
+  // livreur1
+  {
+    path: "livreur1", component: Livreur1Component,
     canActivate: [AuthGuard]
   },
 
