@@ -21,9 +21,8 @@ import { LoginComponent } from './login/login.component';
 // Index
 import { IndexComponent } from './index/index.component';
 
-//Livreur1
-import { Livreur1Component } from './livreur1/livreur1.component';
-
+//List
+import { ListComponent } from './list/list.component';
 //Livreur
 import { LivreurComponent } from './livreur/livreur.component';
 
@@ -90,9 +89,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
 
-  // livreur1
+  // list
   {
-    path: "livreur1", component: Livreur1Component,
+    path: "list", component: ListComponent,
     canActivate: [AuthGuard]
   },
 

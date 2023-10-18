@@ -9,11 +9,11 @@ import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
 import { PackagesService } from '../services/packages.service';
 
 @Component({
-  selector: 'app-livreur1',
-  templateUrl: './livreur1.component.html',
-  styleUrls: ['./livreur1.component.css']
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
 })
-export class Livreur1Component {
+export class ListComponent {
   displayedColumns: string[] = ['id', 'description', 'pickup_time', 'start_time', 'end_time', 'status', 'from_location.lat', 'from_location.lng',];
   dataSource!: MatTableDataSource<any>;
 

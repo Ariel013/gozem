@@ -38,7 +38,7 @@ import { MapsComponent } from './maps/maps.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import {FormsModule} from '@angular/forms';
 import { NgFor } from '@angular/common';
-import { Livreur1Component } from './livreur1/livreur1.component';
+import { ListComponent } from './list/list.component';
 
 
 
@@ -59,7 +59,7 @@ import { Livreur1Component } from './livreur1/livreur1.component';
     DashboardComponent,
     MapsComponent,
     NotfoundComponent,
-    Livreur1Component,
+    ListComponent,
   ],
   imports: [
     BrowserModule,
