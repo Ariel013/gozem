@@ -13,7 +13,7 @@
                     <!-- Role -->
                     <h4 style="display: flex; justify-content: center;">Select your Profile</h4>
                     <div style="display: flex; justify-content: center;">
-                        <select [(ngModel)]="registerForm.value.role" formControlName="role" style="width: 100px;">
+                        <select [(ngModel)]="registerForm.value.role" formControlName="role" style="width: 50%;">
                             <option *ngFor="let role of roles" [ngValue]="role.val">
                                 {{ role.name }}
                             </option>
