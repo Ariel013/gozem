@@ -7,8 +7,8 @@ exports.sendMail = async (data) => {
     port: 587,
     secure: false,
     auth: {
-      user: 'sodjinoukevin13@gmail.com',
-      pass: 'dsavkrrphrhcmnfd'
+      user: process.env.mail,
+      pass: process.env.mailPass
     }
   }
 
